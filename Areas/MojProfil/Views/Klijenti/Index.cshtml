@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TCorp.EntityFramework.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn" })
+</p>
+<table class="table table-hover filterable">
+    <thead>
+        <tr>
+            <th>
+                Kontakt
+            </th>
+            <th>
+                Tvrtka
+            </th>
+            <th style="width:150px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tvrtka)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-mini btn-t" }) | 
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-mini btn-t" }) | 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-mini btn-t" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script src="@Url.Content("~/Scripts/jquery.table-filter.js")"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table.filterable').addTableFilter({
+            labelText: "Filtriraj tablicu",
+            size: 48
+        });
+    });
+</script>

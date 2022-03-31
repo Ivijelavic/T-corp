@@ -1,0 +1,53 @@
+﻿@model TCorp.EntityFramework.Category
+
+@{
+    ViewBag.Title = "Uredi";
+}
+
+<h2>Promotivna Ponuda</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Za kategoriju: @Model.Name</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        @{
+    int i = 0;
+    foreach (TCorp.EntityFramework.PredefinedDiscount discount in ViewBag.AllDiscounts) {
+        var price = Model.PredefinedDiscount_Category.SingleOrDefault(pdc => pdc.predefinedDiscount_id == discount.Id);
+           <fieldset>
+                <legend>@discount.Name</legend>
+                <table>
+                    <tr>
+                        <td>
+                            Mjesečna cijena:
+                        </td>
+                        <td>
+                            @Html.TextBox(String.Format("MonthlyDiscounts[{0}]", i), (price == null) ? "" : price.MonthlyPrice.ToString())
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jednokratna cijena:
+                        </td>
+                        <td>
+                            @Html.TextBox(String.Format("OneTimeDiscounts[{0}]", i), (price == null) ? "" : price.OneTimePrice.ToString())
+                        </td>
+                    </tr>
+                </table>
+                @Html.Hidden(String.Format("PredefinedDiscounts[{0}]", i++), discount.Id)
+            </fieldset>
+    }
+        }
+        <p>
+            <input type="submit" value="Save" class="btn btn-t" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Povratak", "Index", null, new { @class = "btn" })
+</div>

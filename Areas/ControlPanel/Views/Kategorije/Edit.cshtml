@@ -1,0 +1,152 @@
+﻿@model TCorp.EntityFramework.Category
+
+@{
+    ViewBag.Title = "Uredi";
+}
+
+<h2>Uredi</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@Model.Name</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsHidden)
+            @Html.EditorFor(model => model.IsHidden)
+        </div>
+        <div class="editor-field">
+            @Html.ValidationMessageFor(model => model.IsHidden)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsDeleted)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsDeleted)
+            @Html.ValidationMessageFor(model => model.IsDeleted)
+        </div>
+        <br /><div class="editor-label">
+    Prikaži ugovornu obvezu u ponudi
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ShowContractOfferName)
+    @Html.ValidationMessageFor(model => model.ShowContractOfferName)
+</div>
+        <fieldset>
+            <legend>Stanje na skladištu</legend>
+            @{bool noStock = Model.QuantityInStockTracked == false;}
+            @Html.CheckBox("DoNotTrackStock", noStock) Ne vodi se evidencija<br /><br />
+            <div id="stockDiv" @(noStock ? "style=display:none" : String.Empty)>
+                Količina: @Html.TextBox("StockQuantity", Model.QuantityInStock)<br />
+                @Html.CheckBox("UnknownQuantity", Model.QuantityInStockKnown == false) Nepoznata količina <br />
+            </div>
+        </fieldset>
+        <br />
+        @{int i = 0;}
+        @foreach (TCorp.EntityFramework.Contract contract in ViewBag.Contracts) {
+            var categoryContract = Model.Category_Price.SingleOrDefault(cp => cp.contract_id == contract.Id);
+            <fieldset>
+                <legend>@contract.Name</legend>
+                <table>
+                    <tr>
+                        <td>
+                            Mjesečna cijena:
+                        </td>
+                        <td>
+                            @Html.TextBox(String.Format("MonthlyPrices[{0}]", i), (categoryContract == null) ? "" : categoryContract.MonthlyPrice.ToString())
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jednokratna cijena:
+                        </td>
+                        <td>
+                            @Html.TextBox(String.Format("OneTimePrices[{0}]", i), (categoryContract == null) ? "" : categoryContract.OneTimePrice.ToString())
+                        </td>
+                    </tr>
+                </table>
+                @Html.Hidden(String.Format("Contracts[{0}]", i++), contract.Id)
+            </fieldset>
+        }
+        <br />
+        <fieldset>
+            <legend>Početne vrijednosti</legend>
+            <table>
+                <tr>
+                    <td>
+                        Početna količina:
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.InitialQuantity)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Početni popust:
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.InitialDiscount) [%]
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>Naziv za ponudu</legend>
+            @Html.TextAreaFor(model => model.OfferName)
+        </fieldset>
+        <fieldset>
+            <legend>Naziv za ponudu jednokratno</legend>
+            @Html.TextAreaFor(model => model.OfferNameOneTime)
+        </fieldset>
+        <fieldset>
+            <legend>Opis za PDF račun</legend>
+            @Html.TextAreaFor(model => model.Description, new { @class = "textarea-full" })
+        </fieldset>
+        <fieldset>
+            <legend>Opis za unutar tablet aplikacije</legend>
+            @Html.TextAreaFor(model => model.Info, new { @class = "textarea-full" })
+        </fieldset>
+        <br />
+        <p>
+            <input type="submit" value="Save" class="btn btn-t" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { id = Model.ParentId }, new { @class = "btn" })
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".textarea-full").cleditor({height: 600});
+    });
+    $("#DoNotTrackStock").click(function () {
+        if ($("#DoNotTrackStock").prop("checked")) {
+            $("#stockDiv").fadeOut();
+        }
+        else {
+            $("#stockDiv").fadeIn();
+        }
+    });
+    $("#StockQuantity").keypress(function () {
+        $("#UnknownQuantity").prop("checked", false);
+    });
+    $("#StockQuantity").change(function () {
+        if ($("#StockQuantity").val() == "") {
+            $("#UnknownQuantity").prop("checked", true);
+        }
+    });
+</script>

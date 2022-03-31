@@ -1,0 +1,77 @@
+﻿@model TCorp.EntityFramework.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Klijent</legend>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Ime:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Ime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Prezime:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Prezime)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>E-Mail:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Tvrtka:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Tvrtka)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Adresa:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Adresa)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Kontakt broj:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.KontaktBroj)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>OIB:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.OIB)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-t" })
+<br>
+<br>
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+

@@ -1,0 +1,89 @@
+﻿@model TCorp.EntityFramework.Client
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Client</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Ime:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Ime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Prezime:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Prezime)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>E-Mail:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Tvrtka:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Tvrtka)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Adresa:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Adresa)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Kontakt broj:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.KontaktBroj)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>OIB:</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.OIB)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <input type="submit" value="Save" class="btn btn-t" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Moj profil";
+}
+
+<h2>Moj profil</h2>
+<ul class="nav nav-tabs nav-stacked">
+    <li>@Html.ActionLink("Moji klijenti", "Index", new { area = "MojProfil", controller = "Klijenti" })</li>
+    <li>@Html.ActionLink("Statistika", "Index", new { area = "MojProfil", controller = "Statistika" })</li>
+</ul>

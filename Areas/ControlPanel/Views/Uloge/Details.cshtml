@@ -1,0 +1,35 @@
+﻿@model TCorp.EntityFramework.Role
+
+@{
+    ViewBag.Title = "Detalji";
+}
+
+<h2>Profil: @Model.Name</h2>
+
+<fieldset>
+    <legend>Kategorije</legend>
+
+</fieldset>
+
+@Html.Raw(ViewBag.CategoriesTable)
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }, new{@class = "btn btn-t"})
+	<br>
+	<br>
+    @Html.ActionLink("Back to List", "Index", null, new{@class = "btn"})
+</p>
+<script>
+$(document).ready(function () {
+    $('a.link-toggler').click(function (e) {
+        if (e.target != this) return;
+	    $(this).parent().children('ul.tree').toggle(300);
+    });
+	$('a.link-toggler').each(function (index) {
+	    $(this).click();
+	});
+	$('label.nav-header').click(function (e) {
+	    if (e.target != this) return;
+	    $(this).parent().parent().children('ul.tree').toggle(300);
+	});
+});
+</script>

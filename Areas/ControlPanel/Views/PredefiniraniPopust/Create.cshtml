@@ -1,0 +1,41 @@
+﻿@model TCorp.EntityFramework.PredefinedDiscount
+
+@{
+    ViewBag.Title = "Stvori novu promotivnu ponudu";
+}
+
+<h2>Promotivna Ponuda</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <div class="editor-label">
+            Ime:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            Trajanje (u mjesecima):
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DurationInMonths)
+        </div>
+
+        <div class="editor-label">
+            Za ugovornu obvezu:
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ContractId")
+        </div>
+        <p>
+            <input type="submit" value="Save" class="btn btn-t" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Povratak", "Index", null, new { @class = "btn" })
+</div>

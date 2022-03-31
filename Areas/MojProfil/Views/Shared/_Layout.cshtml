@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html class=" js no-flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="float-left">
+                    <a class="brand" href="/">BizTablet CMS</a>
+                </div>
+
+                <ul id="menu" class="nav">
+                    <li>@Html.ActionLink("Naslovnica", "Index", "Home", new { Area = "" }, null)</li>
+                </ul>
+
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        @RenderBody()
+    </section>
+    <footer class="container">
+        <hr>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>BizTablet CMS © THT 2013</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

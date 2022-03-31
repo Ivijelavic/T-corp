@@ -1,0 +1,75 @@
+﻿@model TCorp.EntityFramework.Role
+
+@{
+    ViewBag.Title = "Uredi";
+}
+
+<h2>Uredi profil: @Model.Name</h2>
+
+@using (Html.BeginForm("Edit", "Uloge", FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Uloge</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+			Naziv Uloge:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            Mogućnost ručne korekcije cijene mobilnih uređaja:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManagerPrivilages)
+            @Html.ValidationMessageFor(model => model.ManagerPrivilages)
+        </div>
+    </fieldset>
+    @Html.Raw(ViewBag.CategoriesTable)
+
+    <p>
+        <input type="submit" value="Spremi" class="btn btn-t" />
+    </p>
+    
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new{@class = "btn"})
+</div>
+<script>
+    $(document).ready(function () {
+        $('a.link-toggler').click(function (e) {
+            if (e.target != this) return;
+            $(this).parent().children('ul.tree').toggle(300);
+        });
+        $('a.link-toggler').each(function (index) {
+            $(this).click();
+        });
+        $('label.nav-header').click(function (e) {
+            if (e.target != this) return;
+            $(this).parent().parent().children('ul.tree').toggle(300);
+        });
+        $('.visibilityCheckbox').click(function (e) {
+            var isChecked = $(this).prop('checked');
+            if (isChecked) {
+                var categoryId = $(this).prop('value');
+                $("li").has(".visibilityCheckbox[value='" + categoryId + "']").children(".link-toggler").children(".visibilityCheckbox").prop("checked", true)
+            }
+            $(this).parent().parent().find('.visibilityCheckbox').each(function () {
+                if (e.target != this) $(this).prop('checked', isChecked);
+            });
+        });
+        $('.discountText').change(function (e) {
+            var value = $(this).val();
+            $(this).parent().parent().find('.discountText').each(function () {
+                if (e.target != this) $(this).val(value);
+            });
+        });
+    });
+</script>

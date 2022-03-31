@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TCorp.EntityFramework.Organization>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@{
+    List<string> mrvice = new List<string>(ViewBag.Mrvice);
+}
+<ul class="breadcrumb">
+    @for (int i = 0; i < mrvice.Count - 1; i++) {
+        <li>
+            @Html.Raw(mrvice[i])
+            <span class="divider">/</span>
+        </li>
+    }
+    <li class="active">
+        @Html.Raw(mrvice.Last())
+    </li>
+</ul>
+
+
+@{
+    if (ViewBag.CanCreate == true) {
+        <p>
+            @Html.ActionLink("Create New", "Create", new { parentId = ViewBag.CreateId }, new { @class = "btn" })
+        </p>
+    }
+}
+
+<table class="table table-hover filterable">
+    <thead>
+        <tr>
+            <th>
+                Naziv organizacije
+            </th>
+            <th>
+                Ugašeno
+            </th>
+            <th width="90px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Index", new { id = item.Id }, new { @style = "font-weight: bold;" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-mini btn-t" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-mini btn-t" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="@Url.Content("~/Scripts/jquery.table-filter.js")"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table.filterable').addTableFilter({
+            labelText: "Filtriraj tablicu",
+            size: 48
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html class=" js no-flexbox flexbox-legacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <link href="/Content/datepicker.css" rel="stylesheet" />
+
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")"></script>
+</head>
+<body>
+    <header class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="float-left">
+                    <a class="brand" href="/">BizTablet CMS</a>
+                </div>
+
+                <ul id="menu" class="nav">
+                    <li class="dropdown">
+                        @Html.ActionLink("Naslovnica", "Index", "Home", new { Area = "" }, null)
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        @RenderBody()
+    </section>
+    <footer class="container">
+        <hr>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>BizTablet CMS © THT 2013</p>
+            </div>
+        </div>
+    </footer>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

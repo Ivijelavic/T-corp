@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Statistika</h2>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="input-prepend">
+            <span class="add-on">Za godinu:</span>
+            <select id="yearSelect">
+                @for (int i = 2014; i <= DateTime.Now.Year; i++) {
+                    <option value="@i.ToString()">@i.ToString()</option>
+                }
+            </select>
+        </div>
+        @*<div class="input-prepend">
+                <span class="add-on">Od:</span>
+                <input class="span2" id="datepickerFrom" type="text" style="width:150px" placeholder="Datum Od">
+            </div>
+            <br>
+            <div class="input-prepend">
+                <span class="add-on">Do:</span>
+                <input class="span2" id="datepickerTo" type="text" style="width:150px" placeholder="Datum Do">
+            </div>*@
+    </div>
+    <div class="span6">
+        <div class="input-prepend pull-right">
+            <span class="add-on">Uključi sve: <input type="checkbox" id="allCategories" /></span>
+            <span class="add-on">Kategorija:</span>
+            <select id="categorySelect">
+                @foreach (KeyValuePair<int, string> kvp in ViewBag.SupportedCategories) {
+                    @Html.Raw(String.Format(@"<option value=""{0}"">{1}</option>", kvp.Key, kvp.Value))
+                }
+            </select>
+        </div>
+        <br>
+        <div class="input-prepend pull-right">
+            <span class="add-on">Uključi sve: <input type="checkbox" id="allClients" /></span>
+            <span class="add-on">Klijent:</span>
+            <select id="clientSelect">
+                @foreach (KeyValuePair<string, string> kvp in ViewBag.Clients) {
+                    @Html.Raw(String.Format(@"<option value=""{0}"">{1}</option>", kvp.Key, kvp.Value))
+                }
+            </select>
+        </div>
+        <br>
+        <div class="input-prepend pull-right">
+            <span class="add-on">Vrsta statistike:</span>
+            <select id="statisticsOptionSelect">
+                @foreach (KeyValuePair<int, string> kvp in ViewBag.SupportedStatistics) {
+                    @Html.Raw(String.Format(@"<option value=""{0}"">{1}</option>", kvp.Key, kvp.Value))
+                }
+            </select>
+        </div>
+        <div class="input-prepend pull-right">
+            <span class="add-on">Razlučivost:</span>
+            <select id="resolutionSelect">
+                <option value="year">Godina</option>
+                <option value="quarter">Kvartal</option>
+                <option value="month">Mjesec</option>
+            </select>
+        </div>
+    </div>
+    <div class="span6">
+        <button id="btnRefresh" class="btn btn-t">Osvježi</button>
+    </div>
+</div>
+
+<div id="placeholder" style="width:100%;height:600px"></div>
+
+<script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/jquery.flot.min.js")"></script>
+<script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/jquery.flot.stack.min.js")"></script>
+<script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/jquery.flot.categories.min.js")"></script>
+<script>
+    $(function () {
+        // DATE PICKER
+        //$('#datepickerFrom').datepicker(
+        //	{ format: 'dd.mm.yyyy' }
+        //);
+        //$('#datepickerTo').datepicker(
+        //	{ format: 'dd.mm.yyyy' }
+        //);
+        $('#btnRefresh').click(function () {
+            var year = $("#yearSelect").val();
+            var categoryId = $("#categorySelect").val();
+            var clientId = $("#clientSelect").val();
+            var statisticsOptionId = $("#statisticsOptionSelect").val();
+            var resolution = $("#resolutionSelect").val();
+            var allCategories = $('#allCategories').prop('checked') ? "true" : "false";
+            var allClients = $('#allClients').prop('checked') ? "true" : "false";
+            var requestData = '{"CategoryId":' + categoryId + ',"ClientId":' + clientId + ',"StatisticOption":' + statisticsOptionId + ',"AllClients":' + allClients + ',"AllCategories":' + allCategories + ',"Year":"' + year + '"}';
+            plotWithOptions([]);
+            $.post("/MojProfil/Statistika/Dohvati", { "request": requestData }, function (json) {
+                if (json.Status == "OK") {
+                    if (resolution == "year") {
+                        plotWithOptions($.parseJSON(json.Year));
+                    }
+                    else if (resolution == "quarter") {
+                        plotWithOptions($.parseJSON(json.Quarter));
+                    }
+                    else if (resolution == "month") {
+                        plotWithOptions($.parseJSON(json.Month));
+                    }
+                    else {
+                        //assert(false)
+                    }
+                }
+                else {
+                    alert(json.ErrorText);
+                }
+            }, "json");
+        });
+
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css({
+                position: 'absolute',
+                display: 'none',
+                fontSize: '11px',
+                top: y - 23,
+                left: x - 3,
+                border: '1px solid silver',
+                padding: '2px',
+                'background-color': 'white'
+            }).appendTo("body").fadeIn(200);
+        }
+
+        function plotWithOptions(data) {
+            $.plot("#placeholder", [data], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center"
+                    }
+                },
+                grid: {
+                    hoverable: true
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+        }
+
+        $("#placeholder").bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+                    showTooltip(item.pageX, item.pageY, y);
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;
+            }
+        });
+    });
+</script>

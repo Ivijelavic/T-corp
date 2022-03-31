@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Welcome " + Session["username"];
+}
+
+<h2>Welcome @Session["username"]</h2>
+<ul class="nav nav-tabs nav-stacked">
+    <li>@Html.ActionLink("Upravljaj organizacijama", "Index", "Organizacije")</li>
+	<li>@Html.ActionLink("Upravljaj korisnicima", "Index", "Korisnici")</li>
+	<li>@Html.ActionLink("Upravljaj ulogama", "Index", "Uloge")</li>
+	<li>@Html.ActionLink("Upravljaj kategorijama", "Index", "Kategorije")</li>
+	<li>@Html.ActionLink("Upravljaj predefiniranim popustima", "Index", "PredefiniraniPopust")</li>
+</ul>
+

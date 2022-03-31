@@ -1,0 +1,125 @@
+﻿@model TCorp.EntityFramework.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>User</legend>
+
+        @Html.HiddenFor(model => model.Id)
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<td>
+						<b>Korisničko Ime:</b>
+					</td>
+					<td>
+						@Html.EditorFor(model => model.Username)
+						@Html.ValidationMessageFor(model => model.Username)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Lozinka:</b>
+					</td>
+					<td>
+						@Html.Password("Password") @TempData["PasswordError"]
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Ponovi lozinku:</b>
+					</td>
+					<td>
+						@Html.Password("Password2") @TempData["PasswordError"]
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Ime:</b>
+					</td>
+					<td>
+						@Html.EditorFor(model => model.Firstname)
+						@Html.ValidationMessageFor(model => model.Firstname)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>Prezime:</b>
+					</td>
+					<td>
+						@Html.EditorFor(model => model.Lastname)
+						@Html.ValidationMessageFor(model => model.Lastname)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>E-mail:</b>
+					</td>
+					<td>
+						@Html.EditorFor(model => model.Email)
+						@Html.ValidationMessageFor(model => model.Email)
+					</td>
+				</tr>
+                <tr>
+                    <td>
+                        <b>Bcc polje (višestruke adrese odvojiti zarezom):</b>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.BccField)
+                    </td>
+                </tr>
+				<tr>
+					<td>
+						<b>Uloga:</b>
+					</td>
+					<td>
+						@Html.DropDownList("RoleId")
+					</td>
+				</tr>
+                <tr>
+                    <td>
+                        <b>Nadređena osoba:</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("SuperiorId") @Html.CheckBox("NoSuperior", Model.superiorUser_id == null) Nema nadređenu osobu
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Organizacija:</b>
+                    </td>
+                    <td>
+                        @Html.DropDownList("OrgId")
+                    </td>
+                </tr>
+				<tr>
+					<td>
+						<b>Zabrana:</b>
+					</td>
+					<td>
+						@Html.EditorFor(model => model.IsBanned)
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+        <p>
+            <input type="submit" value="Save" class="btn btn-t" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new{@class = "btn"})
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

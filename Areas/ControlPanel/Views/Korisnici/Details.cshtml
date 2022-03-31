@@ -1,0 +1,102 @@
+﻿@model TCorp.EntityFramework.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+	
+	<table class="table table-bordered">
+		<tbody>
+			<tr>
+				<td>
+					<b>Korisničko Ime:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.Username)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Ime:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.Firstname)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Prezime:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.Lastname)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>E-mail:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.Email)
+				</td>
+			</tr>
+            <tr>
+                <td>
+                    <b>Bcc:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.BccField)
+                </td>
+            </tr>
+			<tr>
+				<td>
+					<b>Uloga:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.Role.Name)
+				</td>
+			</tr>
+            <tr>
+                <td>
+                    <b>Organizacija:</b>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Organization.Name)
+                </td>
+            </tr>
+			<tr>
+				<td>
+					<b>Zabrana:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.IsBanned)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Neuspjeli Pokušaji Spajanja:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.FailedLoginAttempts) @Html.ActionLink("Reset", "ResetLoginAttempts", new { id = Model.Id }, new{@class = "btn btn-mini"})
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Vrijeme Zadnjeg Spajanja:</b>
+				</td>
+				<td>
+					@Html.DisplayFor(model => model.LastLoginRequest)
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</fieldset>
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new{@class = "btn btn-t"})
+<br>
+<br>
+@Html.ActionLink("Back to List", "Index", null, new{@class = "btn"})
+
