@@ -1,0 +1,105 @@
+﻿@model TCorp.ViewModels.Pdf.PdfViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hrvatski Telekom - Živjeti zajedno</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Pdf.css")" />
+</head>
+<body>
+    @{bool noDescription = false;
+    foreach (var viewModel in Model.Descriptions) {
+        noDescription = true;
+        <h4 class="magenta">@viewModel.Name</h4>
+        @Html.Raw(viewModel.Description)
+    }
+        if (noDescription) {
+            <div class="page-break" />
+        }
+    }
+    @if (Model.OneTimeItems.Count > 0) {
+        <table>
+            <caption>Jednokratna cijena</caption>
+            <tr>
+                <th>Naziv usluge</th>
+                <th align="center">Količina</th>
+                <th align="center">Jedinična cijena [kn] bez PDV-a</th>
+                <th align="center">Jedinična cijena [kn] s PDV-om</th>
+                <th align="center">Popust [%]</th>
+                <th align="center">Ukupno [kn] bez PDV-a</th>
+                <th align="center">Ukupno [kn] s PDV-om</th>
+            </tr>
+            @foreach (var viewModel in Model.OneTimeItems) {
+                <tr>
+                    <td>@viewModel.Name</td>
+                    <td align="center">@viewModel.Quantity</td>
+                    <td align="right">@Math.Round(viewModel.UnitPrice, 2).ToString("N2")</td>
+                    <td align="right">@Math.Round(viewModel.UnitPriceWithPdv, 2).ToString("N2")</td>
+                    <td align="right">@((Math.Round(viewModel.Discount, 2) * 100).ToString("N2"))</td>
+                    <td align="right">@Math.Round(viewModel.TotalPrice, 2).ToString("N2")</td>
+                    <td align="right">@Math.Round(viewModel.TotalPriceWithPdv, 2).ToString("N2")</td>
+                </tr>
+            }
+            <tr>
+                <th>Jednokratno:</th>
+                <th colspan="3" align="right">SVEUKUPNO [kn]:</th>
+                <th align="right"></th>
+                <th align="right">@Math.Round(Model.OneTimeTotalPrice, 2).ToString("N2")</th>
+                <th align="right">@Math.Round(Model.OneTimeTotalPriceWithPdv, 2).ToString("N2")</th>
+            </tr>
+        </table>
+        <div class="page-break" />
+    }
+    @if (Model.MonthlyItems.Count > 0) {
+        <table>
+            <caption>Mjesečna cijena</caption>
+            <tr>
+                <th>Naziv usluge</th>
+                <th align="center">Količina</th>
+                <th align="center">Jedinična cijena [kn] bez PDV-a</th>
+                <th align="center">Jedinična cijena [kn] s PDV-om</th>
+                <th align="center">Popust [%]</th>
+                <th align="center">Ukupno [kn] bez PDV-a</th>
+                <th align="center">Ukupno [kn] s PDV-om</th>
+            </tr>
+            @foreach (var viewModel in Model.MonthlyItems) {
+                <tr>
+                    <td>@viewModel.Name</td>
+                    <td align="center">@viewModel.Quantity</td>
+                    <td align="right">@Math.Round(viewModel.UnitPrice, 2).ToString("N2")</td>
+                    <td align="right">@Math.Round(viewModel.UnitPriceWithPdv, 2).ToString("N2")</td>
+                    <td align="right">@((Math.Round(viewModel.Discount, 2) * 100).ToString("N2"))</td>
+                    <td align="right">@Math.Round(viewModel.TotalPrice, 2).ToString("N2")</td>
+                    <td align="right">@Math.Round(viewModel.TotalPriceWithPdv, 2).ToString("N2")</td>
+                </tr>
+            }
+
+            <tr>
+                <th>Mjesečno:</th>
+                <th colspan="3" align="right">SVEUKUPNO [kn]:</th>
+                <th align="right"></th>
+                <th align="right">@Math.Round(Model.MonthlyTotalPrice, 2).ToString("N2")</th>
+                <th align="right">@Math.Round(Model.MonthlyTotalPriceWithPdv, 2).ToString("N2")</th>
+            </tr>
+        </table>
+        <div class="page-break" />
+    }
+    <h4 class="magenta">Rok valjanosti, Prijava kvara i kontakt podaci</h4>
+    Rok realizacije je 30 dana od potpisa ugovora
+    <br />
+    <br />
+    Tehnička pomoć omogućena je 24 sata dnevno na telefon 0800 9100, odnosno e‐mail: kontakt.poslovni@t.ht.hr
+    <br />
+    <br />
+    Hrvatski telekom d.d.<br />
+    T‐Manager : @Model.TManager.DisplayName<br />
+    Kontakt broj : @Model.TManager.Cellphone<br />
+    Email : @Model.TManager.Email<br />
+    @Model.Timestamp
+</body>
+</html>

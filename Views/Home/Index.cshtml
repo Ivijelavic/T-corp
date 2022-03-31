@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<ul class="nav nav-tabs nav-stacked">
+    <li>@Html.ActionLink("Control Panel", "Index", new { area = "ControlPanel", controller = "Izbornik" })</li>
+    <li>@Html.ActionLink("Moj Profil", "Index", new { area = "MojProfil", controller = "Izbornik" })</li>
+    <li>@Html.ActionLink("Logout", "Logout", new { area = "ControlPanel", controller = "Izbornik" })</li>
+</ul>

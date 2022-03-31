@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Cover Page</title>
+		<link rel="stylesheet" href="@Url.Content("~/Content/Pdf.css")" />
+	</head>
+	<body>
+		<h1 class="headline">
+			Ponuda broj @ViewBag.OfferId/@DateTime.Now.Year.ToString()<br />
+			za<br />
+			Poslovne korisnike
+		</h1>
+	</body>
+</html>
