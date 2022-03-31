@@ -1,0 +1,539 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCorp</name>
+    </assembly>
+    <members>
+        <member name="T:TCorp.Components.AdditionalDataFormComponent">
+            <summary>
+            Handles getting Additional Options (dodatne opcije) from the server
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.AdditionalDataFormComponent.GetForm(System.String)">
+            <summary>
+            Gets the JsonAdditionalOptions object
+            </summary>
+            <param name="data">The id of the category, passed as a string</param>
+            <returns>Returns JsonAdditionalOptions which contain all possible AdditionalOptions</returns>
+        </member>
+        <member name="T:TCorp.Components.AuthComponent">
+            <summary>
+            Handles all login related business logic. Buyer beware.
+            </summary>
+        </member>
+        <member name="F:TCorp.Components.AuthComponent.ADMIN_ALLOWED_ROLES">
+            <summary>
+            Allowed roles to enter control (admin) panel. 
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.AuthComponent.GetTokenOwner(System.String)">
+            <summary>
+            Returns the owner of the token if it is valid.
+            Invalid tokens return null.
+            </summary>
+            <param name="token">The access token</param>
+            <returns>Returns the owner of the token or null if invalid token</returns>
+        </member>
+        <member name="M:TCorp.Components.AuthComponent.Logout(System.String)">
+            <summary>
+            Destroys the provided token
+            </summary>
+            <param name="token">The token being destroyed</param>
+            <returns>Returns true on success, or false if the token was not valid</returns>
+        </member>
+        <member name="M:TCorp.Components.AuthComponent.GetUserDetails(System.String)">
+            <summary>
+            Gets details about the provided username.
+            Invalid usernames return null.
+            </summary>
+            <param name="username">The username being queried</param>
+            <returns>Returns details about the username if it exists, otherwise returns null.</returns>
+        </member>
+        <member name="T:TCorp.Components.CategoryComponent">
+            <summary>
+            Fat class that handles all things related to the initial json that the client reads
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.CategoryComponent.GetAllCategories(TCorp.EntityFramework.User,System.Collections.Generic.List{TCorp.EntityFramework.Category},System.Nullable{System.Int32})">
+            <summary>
+            Loads each individual category object
+            </summary>
+            <returns>List{JsonCategory}</returns>
+        </member>
+        <member name="M:TCorp.Components.CategoryComponent.GetCategoriesForUser(TCorp.EntityFramework.User)">
+            <summary>
+            Loads the json and returns it to the api component
+            </summary>
+            <param name="requestUser">The requesting User</param>
+            <returns>Returns the initial json that the client gets, JsonCategoryResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.CategoryComponent.GetAllLeafs(TCorp.EntityFramework.User,System.Collections.Generic.List{TCorp.JsonResponseModels.JsonCategory})">
+            <summary>
+            Recursive function that goes through all the categories and grabs only the ones with no children
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.CategoryComponent.GetAncestorsLinks(TCorp.EntityFramework.TCorpDbEntities,System.Nullable{System.Int32})">
+            <summary>
+            Used to generate breadcrumbs 
+            </summary>
+            <param name="ctx">The database context</param>
+            <param name="id">Id of the category. The method finds it's parent and continues recursively</param>
+            <returns>Returns a list of links that represent breadcrumbs all the way to the currently selected category</returns>
+        </member>
+        <member name="T:TCorp.Components.ClientComponent">
+            <summary>
+            Handles all things client related
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.ClientComponent.ListClients(TCorp.EntityFramework.User)">
+            <summary>
+            Lists all personal (not shared) clients for a specific user 
+            </summary>
+            <param name="requestUser">The requesting user</param>
+            <returns>List{JsonClient}</returns>
+        </member>
+        <member name="M:TCorp.Components.ClientComponent.GetClient(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Get details about a specific client
+            </summary>
+            <param name="data">Client Id</param>
+            <returns>JsonClient</returns>
+        </member>
+        <member name="M:TCorp.Components.ClientComponent.GetClientCollection(TCorp.EntityFramework.User)">
+            <summary>
+            Returns all shared and personal clients
+            </summary>
+            <returns>JsonClientCollection</returns>
+        </member>
+        <member name="M:TCorp.Components.ClientComponent.SaveClient(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Adds a new client
+            </summary>
+            <param name="data">Client data</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ClientComponent.DeserializeClient(System.String)">
+            <summary>
+            Create a Clinet object from a json formatted string
+            </summary>
+            <param name="data">The client json</param>
+            <returns>Client</returns>
+        </member>
+        <member name="T:TCorp.Components.CryptoComponent">
+            <summary>
+            Handles crypto logic. Best not mess here.
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.CryptoComponent.SHA512(System.String)">
+            <summary>
+            Returns a hash of the provided string using SHA-512 algorithm. 
+            </summary>
+            <param name="value">The string being hashed</param>
+            <returns>The hash</returns>
+        </member>
+        <member name="M:TCorp.Components.CryptoComponent.Hash(System.String)">
+            <summary>
+            Performs a SHA-512 hash
+            </summary>
+            <param name="input">The string to be hased</param>
+            <returns>Returns a string of length 128 characters</returns>
+        </member>
+        <member name="M:TCorp.Components.CryptoComponent.Hash(System.String,System.String)">
+            <summary>
+            Applies a salt to the string and
+            performs a SHA-512 hash
+            </summary>
+            <param name="input">The string to be hased</param>
+            <param name="salt">The salt</param>
+            <returns>Returns a string of length 128 characters</returns>
+        </member>
+        <member name="M:TCorp.Components.CryptoComponent.GenerateAccessToken(TCorp.EntityFramework.User)">
+            <summary>
+            Generates a random access token based on the current time,
+            user credentials and a random secure string.
+            </summary>
+            <param name="user">The user requesting the token</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCorp.Components.CryptoComponent.SecureString(System.Int32)">
+            <summary>
+            Private function that generates a random string of variable length
+            using the RNGCryptoServiceProvider class.
+            </summary>
+            <param name="length">The length of the random string</param>
+            <returns>A random string of the given length</returns>
+        </member>
+        <member name="T:TCorp.Components.ApiComponent">
+            <summary>
+            Class responsible for routing and answering requests. Clients that enter this
+            class are assumed to have a valid token. All token validation should be handled in the
+            ServiceController class.
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.ServeGetRequest(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Switcher method that routes incoming get requests
+            </summary>
+            <param name="request">The resource requested</param>
+            <param name="requestUser">User that requested the resource</param>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.ServeSendRequest(System.String,System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Switcher method that routes incoming post requests
+            </summary>
+            <param name="request">The resource requested</param>
+            <param name="requestUser">User that requested the resource</param>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.SendMail(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Sends an email with a pdf attachment to a client.
+            </summary>
+            <param name="data">The json containing information about the mail</param>
+            <param name="requestUser">The user sending the email (not the client)</param>
+            <returns>Status message in the form of a JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetStatisticsContract(TCorp.EntityFramework.User)">
+            <summary>
+            Gets all available statistical options and sends it to the user
+            </summary>
+            <param name="requestUser">The User requesting the info</param>
+            <returns>Returns json</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetStatisticsFor(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets a specific type of statistic
+            </summary>
+            <param name="data">Details about the requested statistic</param>
+            <param name="requestUser">The User requesting the statistical data</param>
+            <returns>Returns json</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetVersion(TCorp.EntityFramework.User)">
+            <summary>
+            Gets the lattest version of the application
+            </summary>
+            <param name="requestUser">The requesting User</param>
+            <returns>Returns the version in the form of a JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.RequestChange(TCorp.EntityFramework.User)">
+            <summary>
+            Notifies that the User has requested a change of his personal data
+            </summary>
+            <param name="requestUser">The User requesting the change</param>
+            <returns>Returns JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.PreviewPdf(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Creates a preview pdf based on the data it is given
+            </summary>
+            <param name="data">The receipt in json</param>
+            <param name="requestUser">The User requesting the pdf</param>
+            <returns>Returns a http link to the pdf document in the JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.SaveAndEmailReceipt(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Saves the receipt to the database and sends a copy of the pdf to the client
+            </summary>
+            <param name="data">The receipt, in json</param>
+            <param name="requestUser">The User requesting the operation</param>
+            <returns>Returns a status message in the form of a JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.SaveClient(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Creates a new client and saves him to the database
+            </summary>
+            <param name="data">The client data, in json</param>
+            <param name="requestUser">The User requesting the operation</param>
+            <returns>Returns a status message in the form of a JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetClientCollection(TCorp.EntityFramework.User)">
+            <summary>
+            Gets a list of all clients, personal and shared
+            </summary>
+            <param name="requestUser">The User requesting his clients</param>
+            <returns>Returns a list of clients in the form of a JsonClientCollection</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.ListClients(TCorp.EntityFramework.User)">
+            <summary>
+            Gets a list of all clients
+            </summary>
+            <param name="requestUser">The User requesting his clients</param>
+            <returns>Returns a list of clients in the form of a List{JsonClient}</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetClient(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets details about a specific client
+            </summary>
+            <param name="data">The client Id</param>
+            <param name="requestUser">The requesting User</param>
+            <returns>Returns client details in JsonClient</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetForm(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets all additional options for a specific category
+            </summary>
+            <param name="data">The category Id</param>
+            <param name="requestUser">The requesting User</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.RemoveAllTemplates(TCorp.EntityFramework.User)">
+            <summary>
+            Removes all templates
+            </summary>
+            <param name="requestUser">The requesting User</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.RemoveTemplate(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Removes a specific template
+            </summary>
+            <param name="data">Template Id</param>
+            <param name="requestUser">The requesting User</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetTemplate(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets a specific template
+            </summary>
+            <param name="data">Template Id</param>
+            <param name="requestUser">The requesting User</param>
+            <returns>Returns the entire receipt in the form of a JsonRacun</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.ListTemplates(TCorp.EntityFramework.User)">
+            <summary>
+            Gets all saved templates for a user
+            </summary>
+            <param name="requestUser">The requesting user</param>
+            <returns>List{JsonRacun}, but loaded only with their names. To get details about a template use GetTemplate</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.SaveTemplate(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Saves a receipt as a new template
+            </summary>
+            <param name="data">The json receipt along with the name of the template</param>
+            <param name="requestUser">The requesting User</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.ApiComponent.GetCategoriesForUser(TCorp.EntityFramework.User)">
+            <summary>
+            Returns the initial json, containing all the categories the client can see, prices, contracts, etc.
+            </summary>
+            <param name="requestUser">The requesting User</param>
+            <returns>Returns JsonCategoryResponse which contains a whole lot of data</returns>
+        </member>
+        <member name="T:TCorp.Components.MailComponent">
+            <summary>
+            Handles all thing E-Mail related
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.MailComponent.SendOffer(TCorp.EntityFramework.User,TCorp.EntityFramework.Client,System.Int32,System.String)">
+            <summary>
+            Sends a pdf offer to a client
+            </summary>
+            <param name="sender">The User sending the offer</param>
+            <param name="recipient">The Client getting the offer</param>
+            <param name="receiptId">The Id of receipt being sent</param>
+            <param name="pdfFile">Name of the pdf file to attach</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:TCorp.Components.MailComponent.SendMail(TCorp.Models.EmailModel)">
+            <summary>
+            Sends an email with no attachment. Used for emailing tech support.
+            </summary>
+            <param name="email">The EmailModel containing the necessary parameters</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCorp.Components.MailComponent.DeserializeEmail(System.String)">
+            <summary>
+            Creates a JsonEmail object from a json encoded string
+            </summary>
+        </member>
+        <member name="T:TCorp.Components.OrganizationComponent">
+            <summary>
+            Handles all thing organization related
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.OrganizationComponent.GetLevel(TCorp.EntityFramework.Organization)">
+            <summary>
+            Gets the depth of the organization in the tree
+            </summary>
+            <returns>Integer</returns>
+        </member>
+        <member name="M:TCorp.Components.OrganizationComponent.GetSelectList">
+            <summary>
+            Prepares a SelectList of organizations to display. Only depth level 6 can be in the list
+            </summary>
+            <returns>A SelectList of organizations with a depth of 6</returns>
+        </member>
+        <member name="M:TCorp.Components.OrganizationComponent.GetSelectList(System.Int32)">
+            <summary>
+            Prepares a SelectList of organizations to display, with one organization being preselected. Only depth level 6 can be in the list
+            </summary>
+            <returns>A SelectList of organizations with a depth of 6 with one organization preselected.</returns>
+        </member>
+        <member name="T:TCorp.Components.PdfComponent">
+            <summary>
+            Handles the pdf generation
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.PdfComponent.CreatePdf(System.String,System.Int32,TCorp.EntityFramework.User)">
+            <summary>
+            Creates a pdf.
+            </summary>
+            <param name="racun">The receipt that will be generating the pdf, json formatted</param>
+            <param name="pdfId">The Id of the pdf</param>
+            <param name="requestUser">The User generating the pdf</param>
+            <returns>Returns the link to the pdf file in the form of a JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.PdfComponent.SendOfferToMail(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Creates a pdf offer and emails it to a client
+            </summary>
+            <param name="data">The reciept in json</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="M:TCorp.Components.PdfComponent.WkHtmlToPdf(System.String,System.Int32,System.String,TCorp.EntityFramework.User)">
+            <summary>
+            WkHtmlToPdf magic happens here.
+            </summary>
+            <param name="racun">The receipt, json formatted</param>
+            <param name="pdfId">The Pdf Id</param>
+            <param name="pdfName">The name of the pdf file</param>
+            <param name="requestUser">The requesting User</param>
+            <returns></returns>
+        </member>
+        <member name="T:TCorp.Components.ReceiptComponent">
+            <summary>
+            Handles all things receipt related
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.ReceiptComponent.SaveReceipt(System.String,System.String,TCorp.EntityFramework.User,System.Int32@)">
+            <summary>
+            Saves the receipt to the database
+            </summary>
+            <param name="data">The receipt in json</param>
+            <param name="pdfName">The name of the pdf file assosiated with this receipt</param>
+            <param name="requestUser">The User saving the receipt</param>
+            <param name="pdfId">The Id of the created pdf. Note out(!)</param>
+            <returns>JsonBasicResponse</returns>
+        </member>
+        <member name="T:TCorp.Components.StatisticsComponent">
+            <summary>
+            Handles all things statistics related. Singleton
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.StatisticsComponent.#ctor">
+            <summary>
+            Initialize all the available statistics options in the constructor
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.StatisticsComponent.StatisticsContract(TCorp.EntityFramework.User)">
+            <summary>
+            Returns all the available statistics options.
+            </summary>
+            <returns>JsonStatisticsContract</returns>
+        </member>
+        <member name="M:TCorp.Components.StatisticsComponent.GetXmlStatistics(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets a specific selected statistic
+            </summary>
+            <returns>Returns a string in xml format, prepared for the client graph</returns>
+        </member>
+        <member name="M:TCorp.Components.StatisticsComponent.GetJsonStatistics(System.String,TCorp.EntityFramework.User)">
+            <summary>
+            Gets a specific selected statistic
+            </summary>
+            <returns>Returns a string in json format, prepared for the web graph</returns>
+        </member>
+        <member name="T:TCorp.Components.StatisticsEngine">
+            <summary>
+            The class that holds the implementations of all the specific statistics available
+            </summary>
+        </member>
+        <member name="M:TCorp.Components.StatisticsEngine.CalculateStatistics(TCorp.JsonIncomingModels.Statistika.JsonStatisticsRequest,System.Func{System.Collections.Generic.IEnumerable{TCorp.EntityFramework.Receipt},System.Decimal})">
+            <summary>
+            The core method for calculating statistics
+            </summary>
+            <param name="request">The statistics request object</param>
+            <param name="query">The query, passed as a functor</param>
+            <returns>Returns the complete StatisticsBundle object</returns>
+        </member>
+        <member name="T:TCorp.Controllers.SuperAdminController">
+            <summary>
+            All methods in this controller require the super administrator role to access. To get finer access controler, 
+            use CoreWebController and put guards at the beggining of each action.
+            </summary>
+        </member>
+        <member name="T:TCorp.Controllers.CoreWebController">
+            <summary>
+            Core web controller that provides a DbLogger and AuthComponent to all inheriting controllers
+            </summary>
+        </member>
+        <member name="T:TCorp.Controllers.ServiceController">
+            <summary>
+            API class exposed to clients.
+            Token validation should take place here
+            </summary>
+        </member>
+        <member name="M:TCorp.Controllers.ServiceController.GetData(System.String,System.String)">
+            <summary>
+            Main method for serving get requests. Based upon the request
+            returns the result only for a valid token
+            </summary>
+            <param name="token">Security token used to validate the request. If valid, token belongs to one person</param>
+            <param name="request">The resource requested from the client</param>
+            <returns>Returns in JSON either the resource requested or an invalid token message</returns>
+        </member>
+        <member name="T:TCorp.Controllers.ValidUserController">
+            <summary>
+            Controller that required the visitor to be logged in
+            </summary>
+        </member>
+        <member name="T:TCorp.Logger.BaseLogger">
+            <summary>
+            Abstract class that provides all the possible Actions that are to be logged.
+            </summary>
+        </member>
+        <member name="T:TCorp.Logger.DbLogger">
+            <summary>
+            Saves the logs in the database
+            </summary>
+        </member>
+        <member name="M:TCorp.Logger.DbLogger.Log(System.Nullable{System.Int32},TCorp.Logger.BaseLogger.WebAction,System.String)">
+            <summary>
+            Performs the logging operation
+            </summary>
+            <param name="userId">The user performing the action</param>
+            <param name="action">The actual action being logged</param>
+            <param name="desc">A short description of the action</param>
+        </member>
+        <member name="M:TCorp.Models.UserViewModel.CreateToken">
+            <summary>
+            Creates a secure token for the logged in user and returns his details
+            in JSON
+            </summary>
+            <returns>User details in JSON</returns>
+        </member>
+        <member name="T:TCorp.ViewModels.Pdf.PdfViewModel">
+            <summary>
+            A ViewModel of the enitire pdf receipt. Handles descriptions and table generation.
+            </summary>
+        </member>
+        <member name="M:TCorp.ViewModels.Pdf.PdfViewModel.AddItem(TCorp.JsonIncomingModels.Racun.JsonPaket)">
+            <summary>
+            Adds the JsonPaket item to the receipt. Description adding goes on here.
+            </summary>
+            <param name="paket">Stavka u računu</param>
+        </member>
+        <member name="T:TCorp.ViewModels.Pdf.CategoryViewModel">
+            <summary>
+            Holds the category descriptions that will be outputed in the pdf receipt
+            </summary>
+        </member>
+        <member name="T:TCorp.ViewModels.Pdf.ReceiptItemViewModel">
+            <summary>
+            The model for an indivitual entity in the pdf receipt.
+            Svaka redak u tablici u pdf-u je jedan ReceiptItemViewModel.
+            </summary>
+        </member>
+    </members>
+</doc>
