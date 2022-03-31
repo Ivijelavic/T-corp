@@ -1,0 +1,72 @@
+body {
+	font-family: 'Tele-GroteskNor';
+}
+
+h1{
+	color: #e20074;
+	font-size: 40pt;
+	font-family: 'Tele-GroteskNor';
+}
+
+h2{}
+h3{}
+h4{}
+
+ol,ul{
+	padding-left:15pt;
+	margin:0;
+}
+
+.headline{
+	text-align: center;
+	margin-top: 100mm;
+}
+
+.page-break	{
+	 display: block;
+	 page-break-before: always;
+}
+
+table {
+	border-width: 0;
+	border-spacing: 0px;
+	border-style: outset;
+	border-color: black;
+	border-collapse: collapse;
+	background-color: white;
+}
+table th {
+	border-width: thin;
+	padding: 10px;
+	border-style: inset;
+	border-color: black;
+	background-color: white;
+	background: #d0d0d0;
+}
+table td {
+	border-width: thin;
+	padding: 10px;
+	border-style: inset;
+	border-color: black;
+	background-color: white;
+	-moz-border-radius: ;
+}
+
+/* FLOAT */
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+
+/* MEDIA */
+@page {
+    size: A4;
+    margin: 0;
+}
+
+/* COLORS */
+.magenta{
+	color:#e20074;
+}

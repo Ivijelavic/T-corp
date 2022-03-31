@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<script>
+			
+			function subst(){
+				var vars={};
+				var x=document.location.search.substring(1).split('&');
+				for (var i in x){
+					var z=x[i].split('=',2);
+					vars[z[0]] = unescape(z[1]);
+				}
+				
+				var y = document.getElementsByClassName('section');
+				var section = document.getElementById('toInsert');
+				var img = '<img src="images/logo.png" />';
+				
+				if(vars['page'] == 1){
+					var table = document.getElementById("header");
+					table.parentNode.removeChild(table);
+					
+					var htImg = document.createElement("img");
+					htImg.setAttribute('src', 'images/logo.png');
+					section.appendChild(htImg);
+
+					for(var j=0; j<y.length; ++j) y[j].appendChild(htImg);
+				}
+			}
+			
+		</script>
+		<style>
+			body{
+				font-family: 'Tele-GroteskNor';
+			}
+			.section{
+				padding: 30pt;
+				font-size: 18pt;
+			}
+		</style>
+	</head>
+	<body style="border: 0; margin: 0;" onload="subst()">
+		<table id="header" style="width: 100%">
+			<tr>
+				<td class="section" style="text-align: center;">Ponuda za poslovne korisnike</td>
+			</tr>
+		</table>
+		<div id="toInsert"></div>
+	</body>
+</html>
