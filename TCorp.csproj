@@ -1,0 +1,668 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E081EC34-EA20-47C3-B200-632E68C432BF}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TCorp</RootNamespace>
+    <AssemblyName>TCorp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\TCorp.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FormGenerator\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\FormGenerator\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\IzbornikController.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\OrganizacijeController.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\KorisniciController.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\KategorijeController.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\PredefiniraniPopustController.cs" />
+    <Compile Include="Areas\ControlPanel\Controllers\UlogeController.cs" />
+    <Compile Include="Areas\ControlPanel\ControlPanelAreaRegistration.cs" />
+    <Compile Include="Areas\ControlPanel\Models\NewUserViewModel.cs" />
+    <Compile Include="Areas\MojProfil\Controllers\IzbornikController.cs" />
+    <Compile Include="Areas\MojProfil\Controllers\KlijentiController.cs" />
+    <Compile Include="Areas\MojProfil\Controllers\StatistikaController.cs" />
+    <Compile Include="Areas\MojProfil\MojProfilAreaRegistration.cs" />
+    <Compile Include="Components\AdditionalDataFormComponent.cs" />
+    <Compile Include="Components\AuthComponent.cs" />
+    <Compile Include="Components\CategoryComponent.cs" />
+    <Compile Include="Components\ClientComponent.cs" />
+    <Compile Include="Components\ConstantsComponent.cs" />
+    <Compile Include="Components\CryptoComponent.cs" />
+    <Compile Include="Components\ApiComponent.cs" />
+    <Compile Include="Components\MailComponent.cs" />
+    <Compile Include="Components\OrganizationComponent.cs" />
+    <Compile Include="Components\PdfComponent.cs" />
+    <Compile Include="Components\ReceiptComponent.cs" />
+    <Compile Include="Components\RoleComponent.cs" />
+    <Compile Include="Components\StatisticsComponent.cs" />
+    <Compile Include="Components\StatisticsEngine.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
+    <Compile Include="Controllers\SuperAdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CoreWebController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ValidUserController.cs" />
+    <Compile Include="EntityFramework\AdditionalOptions.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Category.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Category_InStock.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Category_Price.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Category_Role_MaxDiscount.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Client.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Contract.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device_Price.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device_SelectedCategories.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device_SelectedContracts.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device_TSpotApps_Price.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Device_TSpotApps_SelectedCategories.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Geo.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Organization.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PartialClasses\Category.cs" />
+    <Compile Include="EntityFramework\PartialClasses\Device.cs" />
+    <Compile Include="EntityFramework\PartialClasses\Receipt.cs" />
+    <Compile Include="EntityFramework\PartialClasses\ReceiptTemplate.cs" />
+    <Compile Include="EntityFramework\PartialClasses\Role.cs" />
+    <Compile Include="EntityFramework\PartialClasses\Session.cs" />
+    <Compile Include="EntityFramework\PartialClasses\Client.cs" />
+    <Compile Include="EntityFramework\PartialClasses\User.cs" />
+    <Compile Include="EntityFramework\PredefinedDiscount.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\PredefinedDiscount_Category.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Receipt.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ReceiptAdditionalOption.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ReceiptBasket.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ReceiptDefaultOption.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ReceiptTemplate.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ReceiptTemplateBasket.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Role.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Session.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SocketActionLookup.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SocketLog.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SocketUpdate.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\TCorpDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCorpDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\TCorpDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\TCorpDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TCorpDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\User.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\WebActionLookup.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\WebLog.cs">
+      <DependentUpon>TCorpDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="JsonIncomingModels\Email\JsonEmail.cs" />
+    <Compile Include="JsonIncomingModels\Racun\JsonAdditionalOption.cs" />
+    <Compile Include="JsonIncomingModels\Racun\JsonGeo.cs" />
+    <Compile Include="JsonIncomingModels\Racun\JsonKosarica.cs" />
+    <Compile Include="JsonIncomingModels\Racun\JsonPaket.cs" />
+    <Compile Include="JsonIncomingModels\Racun\JsonRacun.cs" />
+    <Compile Include="JsonIncomingModels\Statistika\JsonStatisticsRequest.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonAdditionalOption.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonAdditionalOptions.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonCategoryResponse.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonClient.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonClientCollection.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonContract.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonDiscount.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonPrice.cs" />
+    <Compile Include="JsonResponseModels\Statistika\JsonStatisticsContract.cs" />
+    <Compile Include="JsonResponseModels\Statistika\JsonStatisticsResponse.cs" />
+    <Compile Include="JsonResponseModels\Statistika\JsonSupportedStatistic.cs" />
+    <Compile Include="Logger\BaseLogger.cs" />
+    <Compile Include="Logger\DbLogger.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonBasicResponse.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonCategory.cs" />
+    <Compile Include="JsonResponseModels\Ostalo\JsonLoginResponse.cs" />
+    <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Models\StatisticsBundle.cs" />
+    <Compile Include="Models\StatisticsItem.cs" />
+    <Compile Include="Models\StatisticsJsonParser.cs" />
+    <Compile Include="Models\StatisticsXmlParser.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Pdf\PdfViewModel.cs" />
+    <Compile Include="ViewModels\Pdf\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Pdf\ReceiptItemViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\Bootstrap-responsive.min.css" />
+    <Content Include="Content\Bootstrap.css" />
+    <Content Include="Content\Bootstrap.min.css" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\develop1.css" />
+    <Content Include="Content\develop2.css" />
+    <Content Include="Content\images\buttons.gif" />
+    <Content Include="Content\images\table.gif" />
+    <Content Include="Content\images\toolbar.gif" />
+    <Content Include="Content\jquery.cleditor.css" />
+    <Content Include="Content\Pdf.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\base\spectrum.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Font\tele-groteskfet-webfont.svg" />
+    <Content Include="Font\tele-groteskhal-webfont.svg" />
+    <Content Include="Font\tele-grotesknor-webfont.svg" />
+    <Content Include="Font\tele-groteskult-webfont.svg" />
+    <Content Include="Font\telegroteskheadline-ultra.svg" />
+    <Content Include="Font\telegroteskheadline.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Areas\ControlPanel\Views\Web.config" />
+    <Content Include="Areas\ControlPanel\Views\Korisnici\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Korisnici\Details.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Korisnici\Create.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Korisnici\Edit.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Korisnici\Delete.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Kategorije\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Kategorije\Create.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Kategorije\Edit.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Uloge\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Uloge\Details.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Uloge\Create.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Uloge\Edit.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Uloge\Delete.cshtml" />
+    <EntityDeploy Include="EntityFramework\TCorpDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TCorpDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityFramework\TCorpDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TCorpDbModel.edmx</DependentUpon>
+      <LastGenOutput>TCorpDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityFramework\TCorpDbModel.edmx.diagram">
+      <DependentUpon>TCorpDbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EntityFramework\TCorpDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TCorpDbModel.edmx</DependentUpon>
+      <LastGenOutput>TCorpDbModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\ControlPanel\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\_ViewStart.cshtml" />
+    <Content Include="Font\fonttele-groteskfet-webfont.eot" />
+    <Content Include="Font\tele-groteskfet-webfont.ttf" />
+    <Content Include="Font\tele-groteskfet-webfont.woff" />
+    <Content Include="Font\tele-groteskhal-webfont.eot" />
+    <Content Include="Font\tele-groteskhal-webfont.ttf" />
+    <Content Include="Font\tele-groteskhal-webfont.woff" />
+    <Content Include="Font\tele-grotesknor-webfont.eot" />
+    <Content Include="Font\tele-grotesknor-webfont.ttf" />
+    <Content Include="Font\tele-grotesknor-webfont.woff" />
+    <Content Include="Font\tele-groteskult-webfont.eot" />
+    <Content Include="Font\tele-groteskult-webfont.ttf" />
+    <Content Include="Font\tele-groteskult-webfont.woff" />
+    <Content Include="Font\telegroteskheadline-ultra.eot" />
+    <Content Include="Font\telegroteskheadline-ultra.ttf" />
+    <Content Include="Font\telegroteskheadline-ultra.woff" />
+    <Content Include="Font\telegroteskheadline.eot" />
+    <Content Include="Font\telegroteskheadline.ttf" />
+    <Content Include="Font\telegroteskheadline.woff" />
+    <Content Include="PdfGeneratorCore\font\fonttele-groteskfet-webfont.eot" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskfet-webfont.ttf" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskfet-webfont.woff" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskhal-webfont.eot" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskhal-webfont.ttf" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskhal-webfont.woff" />
+    <Content Include="PdfGeneratorCore\font\tele-grotesknor-webfont.eot" />
+    <Content Include="PdfGeneratorCore\font\tele-grotesknor-webfont.ttf" />
+    <Content Include="PdfGeneratorCore\font\tele-grotesknor-webfont.woff" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskult-webfont.eot" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskult-webfont.ttf" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskult-webfont.woff" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline-ultra.eot" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline-ultra.ttf" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline-ultra.woff" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline.eot" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline.ttf" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline.woff" />
+    <Content Include="Areas\ControlPanel\Views\PredefiniraniPopust\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\PredefiniraniPopust\Details.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\PredefiniraniPopust\Create.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\PredefiniraniPopust\Edit.cshtml" />
+    <Content Include="packages.config" />
+    <Content Include="Areas\MojProfil\Views\Web.config" />
+    <Content Include="Areas\MojProfil\Views\Izbornik\Index.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Index.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Statistika\Index.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\MojProfil\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Edit.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Create.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Izbornik\Develop1.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Izbornik\Develop2.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Develop1.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Develop2.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Statistika\Develop1.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Statistika\Develop2.cshtml" />
+    <Content Include="Areas\MojProfil\Views\Klijenti\Details.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Organizacije\Create.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Organizacije\Edit.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Organizacije\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\PredefiniraniPopust\Visibility.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Kategorije\EditPredefinedDiscout.cshtml" />
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\pdflogo.png" />
+    <Content Include="Images\table.gif" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskfet-webfont.svg" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskhal-webfont.svg" />
+    <Content Include="PdfGeneratorCore\font\tele-grotesknor-webfont.svg" />
+    <Content Include="PdfGeneratorCore\font\tele-groteskult-webfont.svg" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline-ultra.svg" />
+    <Content Include="PdfGeneratorCore\font\telegroteskheadline.svg" />
+    <Content Include="PdfGeneratorCore\footer.html" />
+    <Content Include="PdfGeneratorCore\header.html" />
+    <Content Include="PdfGeneratorCore\images\logo.png" />
+    <Content Include="PdfGeneratorCore\Pdf.css" />
+    <Content Include="PdfGeneratorCore\toc.xsl" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\develop1.js" />
+    <Content Include="Scripts\develop2.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.cleditor.advancedtable.min.js" />
+    <Content Include="Scripts\jquery.cleditor.js" />
+    <Content Include="Scripts\jquery.cleditor.min.js" />
+    <Content Include="Scripts\jquery.cleditor.table.min.js" />
+    <Content Include="Scripts\jquery.flot.categories.min.js" />
+    <Content Include="Scripts\jquery.flot.min.js" />
+    <Content Include="Scripts\jquery.flot.stack.min.js" />
+    <Content Include="Scripts\jquery.table-filter.js" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\spectrum.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Izbornik\Index.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Izbornik\Login.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Izbornik\Logout.cshtml" />
+    <Content Include="Areas\ControlPanel\Views\Izbornik\Korisnici.cshtml" />
+    <Content Include="Views\Pdf\Body.cshtml" />
+    <Content Include="Views\Pdf\Cover.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\MojProfil\Models\" />
+    <Folder Include="PdfRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1679</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3102/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://192.168.0.17:3102/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
