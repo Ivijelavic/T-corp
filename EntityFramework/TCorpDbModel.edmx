@@ -1,0 +1,2934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TCorpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdditionalOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="IsHidden" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Info" Type="nvarchar(max)" />
+          <Property Name="InitialQuantity" Type="int" />
+          <Property Name="InitialDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OfferName" Type="nvarchar(max)" />
+          <Property Name="OfferNameOneTime" Type="nvarchar(max)" />
+          <Property Name="ShowContractOfferName" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_InStock">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Category_Price">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OneTimePrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Category_Role">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Role_MaxDiscount">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="MaxDiscount" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Tvrtka" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="OIB" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="500" />
+          <Property Name="KontaktBroj" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Client_User">
+          <Key>
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Sifra" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfferName" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar" MaxLength="250" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="SAP" Type="char" MaxLength="18" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="NumberInStock" Type="int" />
+          <Property Name="StockStateAtDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Device_Price">
+          <Key>
+            <PropertyRef Name="device_id" />
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Device_SelectedCategories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="TRGO_sifra" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Device_SelectedContracts">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="TRGO_sifra" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Device_TSpotApps_Price">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="cluster" />
+            <PropertyRef Name="device_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="cluster" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="device_id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Device_TSpotApps_SelectedCategories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="TSpotAppsNaziv" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Geo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Longitude" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Latitude" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PredefinedDiscount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="DurationInMonths" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PredefinedDiscount_Category">
+          <Key>
+            <PropertyRef Name="predefinedDiscount_id" />
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="predefinedDiscount_id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="MonthlyPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OneTimePrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PredefinedDiscount_Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+            <PropertyRef Name="predefinedDiscount_id" />
+          </Key>
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="predefinedDiscount_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="geo_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="PdfName" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReceiptAdditionalOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiptBasket_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Index" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="JednokratnoZaduzenje" Type="bit" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="36" Scale="4" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="ReceiptBasket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="receipt_id" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="OneTimeDiscount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="VrstaRada" Type="nvarchar" MaxLength="250" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="BezOsnovneUsluge" Type="bit" Nullable="false" />
+          <Property Name="JednokratnoZaduzenje" Type="bit" Nullable="false" />
+          <Property Name="discount_id" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="36" Scale="4" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="ReceiptDefaultOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiptTemplateBasket_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Index" Type="int" />
+        </EntityType>
+        <EntityType Name="ReceiptTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReceiptTemplateBasket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_id" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="receiptTemplate_id" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="OneTimeDiscount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="VrstaRada" Type="nvarchar" MaxLength="250" />
+          <Property Name="contract_id" Type="int" Nullable="false" />
+          <Property Name="BezOsnovneUsluge" Type="bit" Nullable="false" />
+          <Property Name="JednokratnoZaduzenje" Type="bit" Nullable="false" />
+          <Property Name="discount_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ManagerPrivilages" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="AccessToken" Type="char" MaxLength="128" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="ValidUntil" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SocketActionLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SocketLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="IP" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="action_id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SocketUpdate">
+          <Key>
+            <PropertyRef Name="Safety" />
+          </Key>
+          <Property Name="Safety" Type="int" Nullable="false" />
+          <Property Name="BroadcastUpdate" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="char" MaxLength="128" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsBanned" Type="bit" Nullable="false" />
+          <Property Name="LastLoginRequest" Type="datetime" />
+          <Property Name="FailedLoginAttempts" Type="tinyint" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cellphone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="KPNumber" Type="nvarchar(max)" />
+          <Property Name="OIB" Type="char" MaxLength="11" />
+          <Property Name="superiorUser_id" Type="int" />
+          <Property Name="RequestChangeDate" Type="datetime" />
+          <Property Name="Salt" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="organization_id" Type="int" Nullable="false" />
+          <Property Name="BccField" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WebActionLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="IP" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="action_id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AdditionalOptions_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AdditionalOptions" Type="Self.AdditionalOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdditionalOptions">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Category1">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_InStock_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Category_InStock" Type="Self.Category_InStock" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_InStock">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Price_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Category_Price" Type="Self.Category_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Price_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Category_Price" Type="Self.Category_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Role_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Category_Role" Type="Self.Category_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Role_MaxDiscount_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Category_Role_MaxDiscount" Type="Self.Category_Role_MaxDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role_MaxDiscount">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Role_MaxDiscount_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Category_Role_MaxDiscount" Type="Self.Category_Role_MaxDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role_MaxDiscount">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Role_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Category_Role" Type="Self.Category_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client_User" Type="Self.Client_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client_User">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Client_User" Type="Self.Client_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client_User">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1" />
+          <End Role="Contract1" Type="Self.Contract" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_Price_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_Price" Type="Self.Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_Price_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_Price" Type="Self.Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_Price_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_Price" Type="Self.Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_SelectedCategories_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_SelectedCategories" Type="Self.Device_SelectedCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_SelectedCategories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_SelectedContracts_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_SelectedContracts" Type="Self.Device_SelectedContracts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_SelectedContracts">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_Price_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_TSpotApps_Price" Type="Self.Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_Price_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_TSpotApps_Price" Type="Self.Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_Price_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_TSpotApps_Price" Type="Self.Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_SelectedCategories_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Device_TSpotApps_SelectedCategories" Type="Self.Device_TSpotApps_SelectedCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_SelectedCategories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Organization1" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PredefinedDiscount_Category" Type="Self.PredefinedDiscount_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Category">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Category_PredefinedDiscount">
+          <End Role="PredefinedDiscount" Type="Self.PredefinedDiscount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PredefinedDiscount_Category" Type="Self.PredefinedDiscount_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Category">
+              <PropertyRef Name="predefinedDiscount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PredefinedDiscount" Type="Self.PredefinedDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Role_PredefinedDiscount">
+          <End Role="PredefinedDiscount" Type="Self.PredefinedDiscount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PredefinedDiscount_Role" Type="Self.PredefinedDiscount_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Role">
+              <PropertyRef Name="predefinedDiscount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Role_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PredefinedDiscount_Role" Type="Self.PredefinedDiscount_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Role">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Geo">
+          <End Role="Geo" Type="Self.Geo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Geo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="geo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_ReceiptDetail_Receipt">
+          <End Role="ReceiptBasket" Type="Self.ReceiptBasket" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptAdditionalOption" Type="Self.ReceiptAdditionalOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptBasket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptAdditionalOption">
+              <PropertyRef Name="receiptBasket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptBasket" Type="Self.ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptBasket" Type="Self.ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_PredefinedDiscount">
+          <End Role="PredefinedDiscount" Type="Self.PredefinedDiscount" Multiplicity="0..1" />
+          <End Role="ReceiptBasket" Type="Self.ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="discount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_Receipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptBasket" Type="Self.ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="receipt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptDefaultOption_ReceiptTemplate">
+          <End Role="ReceiptTemplateBasket" Type="Self.ReceiptTemplateBasket" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptDefaultOption" Type="Self.ReceiptDefaultOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptTemplateBasket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptDefaultOption">
+              <PropertyRef Name="receiptTemplateBasket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplate_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptTemplate" Type="Self.ReceiptTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplate">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="ReceiptTemplateBasket" Type="Self.ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptTemplateBasket" Type="Self.ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_PredefinedDiscount">
+          <End Role="PredefinedDiscount" Type="Self.PredefinedDiscount" Multiplicity="0..1" />
+          <End Role="ReceiptTemplateBasket" Type="Self.ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="discount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_ReceiptTemplate">
+          <End Role="ReceiptTemplate" Type="Self.ReceiptTemplate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptTemplateBasket" Type="Self.ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="receiptTemplate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocketLog_SocketActionLookup">
+          <End Role="SocketActionLookup" Type="Self.SocketActionLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SocketLog" Type="Self.SocketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocketActionLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocketLog">
+              <PropertyRef Name="action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocketLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SocketLog" Type="Self.SocketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocketLog">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User1" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="superiorUser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="WebLog" Type="Self.WebLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebLog">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebLog_WebActionLookup">
+          <End Role="WebActionLookup" Type="Self.WebActionLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WebLog" Type="Self.WebLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebActionLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebLog">
+              <PropertyRef Name="action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TCorpModelStoreContainer">
+          <EntitySet Name="AdditionalOptions" EntityType="Self.AdditionalOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_InStock" EntityType="Self.Category_InStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Price" EntityType="Self.Category_Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Role" EntityType="Self.Category_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Role_MaxDiscount" EntityType="Self.Category_Role_MaxDiscount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client_User" EntityType="Self.Client_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device_Price" EntityType="Self.Device_Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device_SelectedCategories" EntityType="Self.Device_SelectedCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device_SelectedContracts" EntityType="Self.Device_SelectedContracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device_TSpotApps_Price" EntityType="Self.Device_TSpotApps_Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Device_TSpotApps_SelectedCategories" EntityType="Self.Device_TSpotApps_SelectedCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Geo" EntityType="Self.Geo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PredefinedDiscount" EntityType="Self.PredefinedDiscount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PredefinedDiscount_Category" EntityType="Self.PredefinedDiscount_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PredefinedDiscount_Role" EntityType="Self.PredefinedDiscount_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptAdditionalOption" EntityType="Self.ReceiptAdditionalOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptBasket" EntityType="Self.ReceiptBasket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptDefaultOption" EntityType="Self.ReceiptDefaultOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptTemplate" EntityType="Self.ReceiptTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptTemplateBasket" EntityType="Self.ReceiptTemplateBasket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SocketActionLookup" EntityType="Self.SocketActionLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SocketLog" EntityType="Self.SocketLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SocketUpdate" EntityType="Self.SocketUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebActionLookup" EntityType="Self.WebActionLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebLog" EntityType="Self.WebLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdditionalOptions_Category" Association="Self.FK_AdditionalOptions_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="AdditionalOptions" EntitySet="AdditionalOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Category1" Association="Self.FK_Category_Category1">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category1" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_InStock_Category" Association="Self.FK_Category_InStock_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_InStock" EntitySet="Category_InStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Price_Category" Association="Self.FK_Category_Price_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Price" EntitySet="Category_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Price_Contract" Association="Self.FK_Category_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Category_Price" EntitySet="Category_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Role_Category" Association="Self.FK_Category_Role_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Role" EntitySet="Category_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Role_MaxDiscount_Category" Association="Self.FK_Category_Role_MaxDiscount_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Role_MaxDiscount" EntitySet="Category_Role_MaxDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Role_MaxDiscount_Role" Association="Self.FK_Category_Role_MaxDiscount_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Category_Role_MaxDiscount" EntitySet="Category_Role_MaxDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Role_Role" Association="Self.FK_Category_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Category_Role" EntitySet="Category_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_User_Client" Association="Self.FK_Client_User_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client_User" EntitySet="Client_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_User_User" Association="Self.FK_Client_User_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client_User" EntitySet="Client_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Contract" Association="Self.FK_Contract_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Contract1" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_Price_Category" Association="Self.FK_Device_Price_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_Price_Contract" Association="Self.FK_Device_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_Price_Device" Association="Self.FK_Device_Price_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_SelectedCategories_Category" Association="Self.FK_Device_SelectedCategories_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Device_SelectedCategories" EntitySet="Device_SelectedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_SelectedContracts_Contract" Association="Self.FK_Device_SelectedContracts_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_SelectedContracts" EntitySet="Device_SelectedContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Category" Association="Self.FK_Device_TSpotApps_Price_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Contract" Association="Self.FK_Device_TSpotApps_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Device" Association="Self.FK_Device_TSpotApps_Price_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_SelectedCategories_Category" Association="Self.FK_Device_TSpotApps_SelectedCategories_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Device_TSpotApps_SelectedCategories" EntitySet="Device_TSpotApps_SelectedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_Organization" Association="Self.FK_Organization_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Organization1" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Category_Category" Association="Self.FK_PredefinedDiscount_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="PredefinedDiscount_Category" EntitySet="PredefinedDiscount_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Category_PredefinedDiscount" Association="Self.FK_PredefinedDiscount_Category_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="PredefinedDiscount_Category" EntitySet="PredefinedDiscount_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Contract" Association="Self.FK_PredefinedDiscount_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Role_PredefinedDiscount" Association="Self.FK_PredefinedDiscount_Role_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="PredefinedDiscount_Role" EntitySet="PredefinedDiscount_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Role_Role" Association="Self.FK_PredefinedDiscount_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="PredefinedDiscount_Role" EntitySet="PredefinedDiscount_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Client" Association="Self.FK_Receipt_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Geo" Association="Self.FK_Receipt_Geo">
+            <End Role="Geo" EntitySet="Geo" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_ReceiptDetail_Receipt" Association="Self.FK_Receipt_ReceiptDetail_Receipt">
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+            <End Role="ReceiptAdditionalOption" EntitySet="ReceiptAdditionalOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_User" Association="Self.FK_Receipt_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_Category" Association="Self.FK_ReceiptBasket_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_Contract" Association="Self.FK_ReceiptBasket_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_PredefinedDiscount" Association="Self.FK_ReceiptBasket_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_Receipt" Association="Self.FK_ReceiptBasket_Receipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptDefaultOption_ReceiptTemplate" Association="Self.FK_ReceiptDefaultOption_ReceiptTemplate">
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+            <End Role="ReceiptDefaultOption" EntitySet="ReceiptDefaultOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplate_User" Association="Self.FK_ReceiptTemplate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ReceiptTemplate" EntitySet="ReceiptTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_Category" Association="Self.FK_ReceiptTemplateBasket_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_Contract" Association="Self.FK_ReceiptTemplateBasket_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_PredefinedDiscount" Association="Self.FK_ReceiptTemplateBasket_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_ReceiptTemplate" Association="Self.FK_ReceiptTemplateBasket_ReceiptTemplate">
+            <End Role="ReceiptTemplate" EntitySet="ReceiptTemplate" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="Self.FK_Session_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocketLog_SocketActionLookup" Association="Self.FK_SocketLog_SocketActionLookup">
+            <End Role="SocketActionLookup" EntitySet="SocketActionLookup" />
+            <End Role="SocketLog" EntitySet="SocketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocketLog_User" Association="Self.FK_SocketLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SocketLog" EntitySet="SocketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Organization" Association="Self.FK_User_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User1" Association="Self.FK_User_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="User1" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebLog_User" Association="Self.FK_WebLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="WebLog" EntitySet="WebLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebLog_WebActionLookup" Association="Self.FK_WebLog_WebActionLookup">
+            <End Role="WebActionLookup" EntitySet="WebActionLookup" />
+            <End Role="WebLog" EntitySet="WebLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TCorpModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TCorpDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="TCorpModel.Category" />
+          <EntitySet Name="Clients" EntityType="TCorpModel.Client" />
+          <EntitySet Name="Geo" EntityType="TCorpModel.Geo" />
+          <EntitySet Name="Receipts" EntityType="TCorpModel.Receipt" />
+          <EntitySet Name="ReceiptTemplate" EntityType="TCorpModel.ReceiptTemplate" />
+          <EntitySet Name="ReceiptTemplateBasket" EntityType="TCorpModel.ReceiptTemplateBasket" />
+          <EntitySet Name="Roles" EntityType="TCorpModel.Role" />
+          <EntitySet Name="Sessions" EntityType="TCorpModel.Session" />
+          <EntitySet Name="SocketActionLookup" EntityType="TCorpModel.SocketActionLookup" />
+          <EntitySet Name="SocketLog" EntityType="TCorpModel.SocketLog" />
+          <EntitySet Name="SocketUpdate" EntityType="TCorpModel.SocketUpdate" />
+          <EntitySet Name="Users" EntityType="TCorpModel.User" />
+          <EntitySet Name="WebActionLookup" EntityType="TCorpModel.WebActionLookup" />
+          <EntitySet Name="WebLogs" EntityType="TCorpModel.WebLog" />
+          <AssociationSet Name="FK_Category_Category1" Association="TCorpModel.FK_Category_Category1">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Client" Association="TCorpModel.FK_Receipt_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Geo" Association="TCorpModel.FK_Receipt_Geo">
+            <End Role="Geo" EntitySet="Geo" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_User" Association="TCorpModel.FK_Receipt_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplate_User" Association="TCorpModel.FK_ReceiptTemplate_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ReceiptTemplate" EntitySet="ReceiptTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_ReceiptTemplate" Association="TCorpModel.FK_ReceiptTemplateBasket_ReceiptTemplate">
+            <End Role="ReceiptTemplate" EntitySet="ReceiptTemplate" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="TCorpModel.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="TCorpModel.FK_Session_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocketLog_SocketActionLookup" Association="TCorpModel.FK_SocketLog_SocketActionLookup">
+            <End Role="SocketActionLookup" EntitySet="SocketActionLookup" />
+            <End Role="SocketLog" EntitySet="SocketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocketLog_User" Association="TCorpModel.FK_SocketLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SocketLog" EntitySet="SocketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebLog_User" Association="TCorpModel.FK_WebLog_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WebLog" EntitySet="WebLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WebLog_WebActionLookup" Association="TCorpModel.FK_WebLog_WebActionLookup">
+            <End Role="WebActionLookup" EntitySet="WebActionLookup" />
+            <End Role="WebLog" EntitySet="WebLogs" />
+          </AssociationSet>
+          <AssociationSet Name="Category_Role" Association="TCorpModel.Category_Role">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="Client_User" Association="TCorpModel.Client_User">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_Category" Association="TCorpModel.FK_ReceiptTemplateBasket_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <EntitySet Name="AdditionalOptions" EntityType="TCorpModel.AdditionalOptions" />
+          <EntitySet Name="ReceiptAdditionalOption" EntityType="TCorpModel.ReceiptAdditionalOption" />
+          <AssociationSet Name="FK_User_User1" Association="TCorpModel.FK_User_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Category_Role_MaxDiscount" EntityType="TCorpModel.Category_Role_MaxDiscount" />
+          <AssociationSet Name="FK_Category_Role_MaxDiscount_Category" Association="TCorpModel.FK_Category_Role_MaxDiscount_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_Role_MaxDiscount" EntitySet="Category_Role_MaxDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Role_MaxDiscount_Role" Association="TCorpModel.FK_Category_Role_MaxDiscount_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Category_Role_MaxDiscount" EntitySet="Category_Role_MaxDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalOptions_Category" Association="TCorpModel.FK_AdditionalOptions_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="AdditionalOptions" EntitySet="AdditionalOptions" />
+          </AssociationSet>
+          <EntitySet Name="ReceiptDefaultOption" EntityType="TCorpModel.ReceiptDefaultOption" />
+          <AssociationSet Name="FK_ReceiptDefaultOption_ReceiptTemplate" Association="TCorpModel.FK_ReceiptDefaultOption_ReceiptTemplate">
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+            <End Role="ReceiptDefaultOption" EntitySet="ReceiptDefaultOption" />
+          </AssociationSet>
+          <EntitySet Name="Category_Price" EntityType="TCorpModel.Category_Price" />
+          <EntitySet Name="Contract" EntityType="TCorpModel.Contract" />
+          <AssociationSet Name="FK_Category_Price_Category" Association="TCorpModel.FK_Category_Price_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_Price" EntitySet="Category_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Price_Contract" Association="TCorpModel.FK_Category_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Category_Price" EntitySet="Category_Price" />
+          </AssociationSet>
+          <EntitySet Name="ReceiptBasket" EntityType="TCorpModel.ReceiptBasket" />
+          <AssociationSet Name="FK_ReceiptBasket_Category" Association="TCorpModel.FK_ReceiptBasket_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_Receipt" Association="TCorpModel.FK_ReceiptBasket_Receipt">
+            <End Role="Receipt" EntitySet="Receipts" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_ReceiptDetail_Receipt" Association="TCorpModel.FK_Receipt_ReceiptDetail_Receipt">
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+            <End Role="ReceiptAdditionalOption" EntitySet="ReceiptAdditionalOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Contract" Association="TCorpModel.FK_Contract_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Contract1" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_Contract" Association="TCorpModel.FK_ReceiptBasket_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_Contract" Association="TCorpModel.FK_ReceiptTemplateBasket_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <EntitySet Name="PredefinedDiscount" EntityType="TCorpModel.PredefinedDiscount" />
+          <EntitySet Name="PredefinedDiscount_Category" EntityType="TCorpModel.PredefinedDiscount_Category" />
+          <AssociationSet Name="FK_PredefinedDiscount_Category_Category" Association="TCorpModel.FK_PredefinedDiscount_Category_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="PredefinedDiscount_Category" EntitySet="PredefinedDiscount_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Contract" Association="TCorpModel.FK_PredefinedDiscount_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PredefinedDiscount_Category_PredefinedDiscount" Association="TCorpModel.FK_PredefinedDiscount_Category_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="PredefinedDiscount_Category" EntitySet="PredefinedDiscount_Category" />
+          </AssociationSet>
+          <AssociationSet Name="PredefinedDiscount_Role" Association="TCorpModel.PredefinedDiscount_Role">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptTemplateBasket_PredefinedDiscount" Association="TCorpModel.FK_ReceiptTemplateBasket_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="ReceiptTemplateBasket" EntitySet="ReceiptTemplateBasket" />
+          </AssociationSet>
+          <EntitySet Name="Device" EntityType="TCorpModel.Device" />
+          <EntitySet Name="Device_Price" EntityType="TCorpModel.Device_Price" />
+          <AssociationSet Name="FK_Device_Price_Category" Association="TCorpModel.FK_Device_Price_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_Price_Contract" Association="TCorpModel.FK_Device_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_Price_Device" Association="TCorpModel.FK_Device_Price_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Device_Price" EntitySet="Device_Price" />
+          </AssociationSet>
+          <EntitySet Name="Device_SelectedCategories" EntityType="TCorpModel.Device_SelectedCategories" />
+          <EntitySet Name="Device_SelectedContracts" EntityType="TCorpModel.Device_SelectedContracts" />
+          <AssociationSet Name="FK_Device_SelectedCategories_Category" Association="TCorpModel.FK_Device_SelectedCategories_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Device_SelectedCategories" EntitySet="Device_SelectedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_SelectedContracts_Contract" Association="TCorpModel.FK_Device_SelectedContracts_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_SelectedContracts" EntitySet="Device_SelectedContracts" />
+          </AssociationSet>
+          <EntitySet Name="Organization" EntityType="TCorpModel.Organization" />
+          <AssociationSet Name="FK_Organization_Organization" Association="TCorpModel.FK_Organization_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Organization1" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Organization" Association="TCorpModel.FK_User_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Category_InStock" EntityType="TCorpModel.Category_InStock" />
+          <AssociationSet Name="FK_Category_InStock_Category" Association="TCorpModel.FK_Category_InStock_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_InStock" EntitySet="Category_InStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceiptBasket_PredefinedDiscount" Association="TCorpModel.FK_ReceiptBasket_PredefinedDiscount">
+            <End Role="PredefinedDiscount" EntitySet="PredefinedDiscount" />
+            <End Role="ReceiptBasket" EntitySet="ReceiptBasket" />
+          </AssociationSet>
+          <EntitySet Name="Device_TSpotApps_Price" EntityType="TCorpModel.Device_TSpotApps_Price" />
+          <EntitySet Name="Device_TSpotApps_SelectedCategories" EntityType="TCorpModel.Device_TSpotApps_SelectedCategories" />
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Category" Association="TCorpModel.FK_Device_TSpotApps_Price_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_SelectedCategories_Category" Association="TCorpModel.FK_Device_TSpotApps_SelectedCategories_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Device_TSpotApps_SelectedCategories" EntitySet="Device_TSpotApps_SelectedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Contract" Association="TCorpModel.FK_Device_TSpotApps_Price_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Device_TSpotApps_Price_Device" Association="TCorpModel.FK_Device_TSpotApps_Price_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Device_TSpotApps_Price" EntitySet="Device_TSpotApps_Price" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ChildCategories" Relationship="TCorpModel.FK_Category_Category1" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="ParentCategory" Relationship="TCorpModel.FK_Category_Category1" FromRole="Category1" ToRole="Category" />
+          <NavigationProperty Name="AuthorizedRoles" Relationship="TCorpModel.Category_Role" FromRole="Category" ToRole="Role" />
+          <NavigationProperty Name="ReceiptTemplateBasket" Relationship="TCorpModel.FK_ReceiptTemplateBasket_Category" FromRole="Category" ToRole="ReceiptTemplateBasket" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Info" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Role_MaxDiscount" Relationship="TCorpModel.FK_Category_Role_MaxDiscount_Category" FromRole="Category" ToRole="Category_Role_MaxDiscount" />
+          <NavigationProperty Name="AdditionalOptions" Relationship="TCorpModel.FK_AdditionalOptions_Category" FromRole="Category" ToRole="AdditionalOptions" />
+          <NavigationProperty Name="Category_Price" Relationship="TCorpModel.FK_Category_Price_Category" FromRole="Category" ToRole="Category_Price" />
+          <NavigationProperty Name="ReceiptBasket" Relationship="TCorpModel.FK_ReceiptBasket_Category" FromRole="Category" ToRole="ReceiptBasket" />
+          <Property Name="InitialQuantity" Type="Int32" />
+          <Property Name="InitialDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OfferName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OfferNameOneTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PredefinedDiscount_Category" Relationship="TCorpModel.FK_PredefinedDiscount_Category_Category" FromRole="Category" ToRole="PredefinedDiscount_Category" />
+          <NavigationProperty Name="Device_Price" Relationship="TCorpModel.FK_Device_Price_Category" FromRole="Category" ToRole="Device_Price" />
+          <NavigationProperty Name="Device_SelectedCategories" Relationship="TCorpModel.FK_Device_SelectedCategories_Category" FromRole="Category" ToRole="Device_SelectedCategories" />
+          <NavigationProperty Name="Category_InStock" Relationship="TCorpModel.FK_Category_InStock_Category" FromRole="Category" ToRole="Category_InStock" />
+          <NavigationProperty Name="Device_TSpotApps_Price" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Category" FromRole="Category" ToRole="Device_TSpotApps_Price" />
+          <NavigationProperty Name="Device_TSpotApps_SelectedCategories" Relationship="TCorpModel.FK_Device_TSpotApps_SelectedCategories_Category" FromRole="Category" ToRole="Device_TSpotApps_SelectedCategories" />
+          <Property Name="ShowContractOfferName" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Receipt" Relationship="TCorpModel.FK_Receipt_Client" FromRole="Client" ToRole="Receipt" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.Client_User" FromRole="Client" ToRole="User" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Prezime" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tvrtka" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OIB" Nullable="false" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Adresa" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="KontaktBroj" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Geo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <Property Name="Latitude" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Receipt" Relationship="TCorpModel.FK_Receipt_Geo" FromRole="Geo" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="geo_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Client" Relationship="TCorpModel.FK_Receipt_Client" FromRole="Receipt" ToRole="Client" />
+          <NavigationProperty Name="Geo" Relationship="TCorpModel.FK_Receipt_Geo" FromRole="Receipt" ToRole="Geo" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_Receipt_User" FromRole="Receipt" ToRole="User" />
+          <NavigationProperty Name="ReceiptBasket" Relationship="TCorpModel.FK_ReceiptBasket_Receipt" FromRole="Receipt" ToRole="ReceiptBasket" />
+          <Property Name="PdfName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReceiptTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_ReceiptTemplate_User" FromRole="ReceiptTemplate" ToRole="User" />
+          <NavigationProperty Name="ReceiptTemplateBasket" Relationship="TCorpModel.FK_ReceiptTemplateBasket_ReceiptTemplate" FromRole="ReceiptTemplate" ToRole="ReceiptTemplateBasket" />
+        </EntityType>
+        <EntityType Name="ReceiptTemplateBasket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="receiptTemplate_id" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="ReceiptTemplate" Relationship="TCorpModel.FK_ReceiptTemplateBasket_ReceiptTemplate" FromRole="ReceiptTemplateBasket" ToRole="ReceiptTemplate" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_ReceiptTemplateBasket_Category" FromRole="ReceiptTemplateBasket" ToRole="Category" />
+          <NavigationProperty Name="ReceiptDefaultOption" Relationship="TCorpModel.FK_ReceiptDefaultOption_ReceiptTemplate" FromRole="ReceiptTemplateBasket" ToRole="ReceiptDefaultOption" />
+          <Property Type="String" Name="VrstaRada" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OneTimeDiscount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="BezOsnovneUsluge" Type="Boolean" Nullable="false" />
+          <Property Name="JednokratnoZaduzenje" Type="Boolean" Nullable="false" />
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_ReceiptTemplateBasket_Contract" FromRole="ReceiptTemplateBasket" ToRole="Contract" />
+          <Property Name="discount_id" Type="Int32" />
+          <NavigationProperty Name="PredefinedDiscount" Relationship="TCorpModel.FK_ReceiptTemplateBasket_PredefinedDiscount" FromRole="ReceiptTemplateBasket" ToRole="PredefinedDiscount" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_User_Role" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.Category_Role" FromRole="Role" ToRole="Category" />
+          <NavigationProperty Name="Category_Role_MaxDiscount" Relationship="TCorpModel.FK_Category_Role_MaxDiscount_Role" FromRole="Role" ToRole="Category_Role_MaxDiscount" />
+          <NavigationProperty Name="PredefinedDiscount" Relationship="TCorpModel.PredefinedDiscount_Role" FromRole="Role" ToRole="PredefinedDiscount" />
+          <Property Name="ManagerPrivilages" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="AccessToken" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidUntil" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Owner" Relationship="TCorpModel.FK_Session_User" FromRole="Session" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SocketActionLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SocketLog" Relationship="TCorpModel.FK_SocketLog_SocketActionLookup" FromRole="SocketActionLookup" ToRole="SocketLog" />
+        </EntityType>
+        <EntityType Name="SocketLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="action_id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SocketActionLookup" Relationship="TCorpModel.FK_SocketLog_SocketActionLookup" FromRole="SocketLog" ToRole="SocketActionLookup" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_SocketLog_User" FromRole="SocketLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SocketUpdate">
+          <Key>
+            <PropertyRef Name="Safety" />
+          </Key>
+          <Property Name="Safety" Type="Int32" Nullable="false" />
+          <Property Name="BroadcastUpdate" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="true" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Lastname" Type="String" MaxLength="100" Nullable="false" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IsBanned" Type="Boolean" Nullable="false" />
+          <Property Name="LastLoginRequest" Type="DateTime" Precision="3" />
+          <Property Name="FailedLoginAttempts" Type="Byte" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Receipt" Relationship="TCorpModel.FK_Receipt_User" FromRole="User" ToRole="Receipt" />
+          <NavigationProperty Name="ReceiptTemplate" Relationship="TCorpModel.FK_ReceiptTemplate_User" FromRole="User" ToRole="ReceiptTemplate" />
+          <NavigationProperty Name="Role" Relationship="TCorpModel.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Session" Relationship="TCorpModel.FK_Session_User" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="SocketLog" Relationship="TCorpModel.FK_SocketLog_User" FromRole="User" ToRole="SocketLog" />
+          <NavigationProperty Name="WebLog" Relationship="TCorpModel.FK_WebLog_User" FromRole="User" ToRole="WebLog" />
+          <NavigationProperty Name="Client" Relationship="TCorpModel.Client_User" FromRole="User" ToRole="Client" />
+          <Property Type="String" Name="Phone" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Cellphone" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="KPNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OIB" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="superiorUser_id" />
+          <NavigationProperty Name="Subordinates" Relationship="TCorpModel.FK_User_User1" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="Superior" Relationship="TCorpModel.FK_User_User1" FromRole="User1" ToRole="User" />
+          <Property Type="DateTime" Name="RequestChangeDate" Precision="3" />
+          <Property Type="String" Name="Salt" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="TCorpModel.FK_User_Organization" FromRole="User" ToRole="Organization" />
+          <Property Name="BccField" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WebActionLookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="WebLog" Relationship="TCorpModel.FK_WebLog_WebActionLookup" FromRole="WebActionLookup" ToRole="WebLog" />
+        </EntityType>
+        <EntityType Name="WebLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="action_id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_WebLog_User" FromRole="WebLog" ToRole="User" />
+          <NavigationProperty Name="WebActionLookup" Relationship="TCorpModel.FK_WebLog_WebActionLookup" FromRole="WebLog" ToRole="WebActionLookup" />
+        </EntityType>
+        <Association Name="FK_Category_Category1">
+          <End Role="Category" Type="TCorpModel.Category" Multiplicity="0..1" />
+          <End Role="Category1" Type="TCorpModel.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Client">
+          <End Role="Client" Type="TCorpModel.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="TCorpModel.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Geo">
+          <End Role="Geo" Type="TCorpModel.Geo" Multiplicity="1" />
+          <End Role="Receipt" Type="TCorpModel.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Geo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="geo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_User">
+          <End Role="User" Type="TCorpModel.User" Multiplicity="1" />
+          <End Role="Receipt" Type="TCorpModel.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplate_User">
+          <End Role="User" Type="TCorpModel.User" Multiplicity="1" />
+          <End Role="ReceiptTemplate" Type="TCorpModel.ReceiptTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplate">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_ReceiptTemplate">
+          <End Role="ReceiptTemplate" Type="TCorpModel.ReceiptTemplate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReceiptTemplateBasket" Type="TCorpModel.ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="receiptTemplate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="TCorpModel.Role" Multiplicity="1" />
+          <End Role="User" Type="TCorpModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Role="User" Type="TCorpModel.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Session" Type="TCorpModel.Session" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocketLog_SocketActionLookup">
+          <End Role="SocketActionLookup" Type="TCorpModel.SocketActionLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SocketLog" Type="TCorpModel.SocketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocketActionLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocketLog">
+              <PropertyRef Name="action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocketLog_User">
+          <End Role="User" Type="TCorpModel.User" Multiplicity="0..1" />
+          <End Role="SocketLog" Type="TCorpModel.SocketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SocketLog">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebLog_User">
+          <End Role="User" Type="TCorpModel.User" Multiplicity="0..1" />
+          <End Role="WebLog" Type="TCorpModel.WebLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebLog">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WebLog_WebActionLookup">
+          <End Role="WebActionLookup" Type="TCorpModel.WebActionLookup" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WebLog" Type="TCorpModel.WebLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebActionLookup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebLog">
+              <PropertyRef Name="action_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Category_Role">
+          <End Role="Category" Type="TCorpModel.Category" Multiplicity="*" />
+          <End Role="Role" Type="TCorpModel.Role" Multiplicity="*" />
+        </Association>
+        <Association Name="Client_User">
+          <End Role="Client" Type="TCorpModel.Client" Multiplicity="*" />
+          <End Role="User" Type="TCorpModel.User" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="TCorpModel.ReceiptTemplateBasket" Role="ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdditionalOptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Data" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_AdditionalOptions_Category" FromRole="AdditionalOptions" ToRole="Category" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateModified" Precision="3" />
+        </EntityType>
+        <EntityType Name="ReceiptAdditionalOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Price" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="receiptBasket_id" Nullable="false" />
+          <Property Type="Int32" Name="Index" />
+          <Property Type="Decimal" Name="Discount" Precision="5" Scale="2" />
+          <Property Type="Int32" Name="Quantity" />
+          <NavigationProperty Name="ReceiptBasket" Relationship="TCorpModel.FK_Receipt_ReceiptDetail_Receipt" FromRole="ReceiptAdditionalOption" ToRole="ReceiptBasket" />
+          <Property Name="JednokratnoZaduzenje" Type="Boolean" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="36" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_User_User1">
+          <End Type="TCorpModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TCorpModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="superiorUser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category_Role_MaxDiscount">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <Property Type="Int32" Name="role_id" Nullable="false" />
+          <Property Type="Double" Name="MaxDiscount" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Category_Role_MaxDiscount_Category" FromRole="Category_Role_MaxDiscount" ToRole="Category" />
+          <NavigationProperty Name="Role" Relationship="TCorpModel.FK_Category_Role_MaxDiscount_Role" FromRole="Category_Role_MaxDiscount" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Category_Role_MaxDiscount_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="TCorpModel.Category_Role_MaxDiscount" Role="Category_Role_MaxDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role_MaxDiscount">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Role_MaxDiscount_Role">
+          <End Type="TCorpModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="TCorpModel.Category_Role_MaxDiscount" Role="Category_Role_MaxDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Role_MaxDiscount">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalOptions_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.AdditionalOptions" Role="AdditionalOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdditionalOptions">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReceiptDefaultOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="receiptTemplateBasket_id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Price" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Index" />
+          <NavigationProperty Name="ReceiptTemplateBasket" Relationship="TCorpModel.FK_ReceiptDefaultOption_ReceiptTemplate" FromRole="ReceiptDefaultOption" ToRole="ReceiptTemplateBasket" />
+        </EntityType>
+        <Association Name="FK_ReceiptDefaultOption_ReceiptTemplate">
+          <End Type="TCorpModel.ReceiptTemplateBasket" Role="ReceiptTemplateBasket" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptDefaultOption" Role="ReceiptDefaultOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptTemplateBasket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptDefaultOption">
+              <PropertyRef Name="receiptTemplateBasket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category_Price">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <Property Type="Int32" Name="contract_id" Nullable="false" />
+          <Property Type="Decimal" Name="MonthlyPrice" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="OneTimePrice" Precision="18" Scale="2" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Category_Price_Category" FromRole="Category_Price" ToRole="Category" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_Category_Price_Contract" FromRole="Category_Price" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sifra" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Price" Relationship="TCorpModel.FK_Category_Price_Contract" FromRole="Contract" ToRole="Category_Price" />
+          <NavigationProperty Name="Contract1" Relationship="TCorpModel.FK_Contract_Contract" FromRole="Contract" ToRole="Contract1" />
+          <NavigationProperty Name="Contract2" Relationship="TCorpModel.FK_Contract_Contract" FromRole="Contract1" ToRole="Contract" />
+          <NavigationProperty Name="ReceiptBasket" Relationship="TCorpModel.FK_ReceiptBasket_Contract" FromRole="Contract" ToRole="ReceiptBasket" />
+          <NavigationProperty Name="ReceiptTemplateBasket" Relationship="TCorpModel.FK_ReceiptTemplateBasket_Contract" FromRole="Contract" ToRole="ReceiptTemplateBasket" />
+          <NavigationProperty Name="PredefinedDiscount" Relationship="TCorpModel.FK_PredefinedDiscount_Contract" FromRole="Contract" ToRole="PredefinedDiscount" />
+          <NavigationProperty Name="Device_Price" Relationship="TCorpModel.FK_Device_Price_Contract" FromRole="Contract" ToRole="Device_Price" />
+          <NavigationProperty Name="Device_SelectedContracts" Relationship="TCorpModel.FK_Device_SelectedContracts_Contract" FromRole="Contract" ToRole="Device_SelectedContracts" />
+          <NavigationProperty Name="Device_TSpotApps_Price" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Contract" FromRole="Contract" ToRole="Device_TSpotApps_Price" />
+          <Property Name="OfferName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Category_Price_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Category_Price" Role="Category_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Price_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="TCorpModel.Category_Price" Role="Category_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReceiptBasket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="receipt_id" Nullable="false" />
+          <Property Type="Decimal" Name="Discount" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="VrstaRada" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_ReceiptBasket_Category" FromRole="ReceiptBasket" ToRole="Category" />
+          <NavigationProperty Name="Receipt" Relationship="TCorpModel.FK_ReceiptBasket_Receipt" FromRole="ReceiptBasket" ToRole="Receipt" />
+          <NavigationProperty Name="ReceiptAdditionalOption" Relationship="TCorpModel.FK_Receipt_ReceiptDetail_Receipt" FromRole="ReceiptBasket" ToRole="ReceiptAdditionalOption" />
+          <Property Name="OneTimeDiscount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="BezOsnovneUsluge" Type="Boolean" Nullable="false" />
+          <Property Name="JednokratnoZaduzenje" Type="Boolean" Nullable="false" />
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_ReceiptBasket_Contract" FromRole="ReceiptBasket" ToRole="Contract" />
+          <Property Name="discount_id" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="36" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="PredefinedDiscount" Relationship="TCorpModel.FK_ReceiptBasket_PredefinedDiscount" FromRole="ReceiptBasket" ToRole="PredefinedDiscount" />
+        </EntityType>
+        <Association Name="FK_ReceiptBasket_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptBasket" Role="ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_Receipt">
+          <End Type="TCorpModel.Receipt" Role="Receipt" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptBasket" Role="ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="receipt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_ReceiptDetail_Receipt">
+          <End Type="TCorpModel.ReceiptBasket" Role="ReceiptBasket" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptAdditionalOption" Role="ReceiptAdditionalOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptBasket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptAdditionalOption">
+              <PropertyRef Name="receiptBasket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1" />
+          <End Type="TCorpModel.Contract" Role="Contract1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptBasket" Role="ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.ReceiptTemplateBasket" Role="ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PredefinedDiscount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_PredefinedDiscount_Contract" FromRole="PredefinedDiscount" ToRole="Contract" />
+          <NavigationProperty Name="PredefinedDiscount_Category" Relationship="TCorpModel.FK_PredefinedDiscount_Category_PredefinedDiscount" FromRole="PredefinedDiscount" ToRole="PredefinedDiscount_Category" />
+          <NavigationProperty Name="Role" Relationship="TCorpModel.PredefinedDiscount_Role" FromRole="PredefinedDiscount" ToRole="Role" />
+          <Property Name="DurationInMonths" Type="Int32" />
+          <NavigationProperty Name="ReceiptTemplateBasket" Relationship="TCorpModel.FK_ReceiptTemplateBasket_PredefinedDiscount" FromRole="PredefinedDiscount" ToRole="ReceiptTemplateBasket" />
+          <NavigationProperty Name="ReceiptBasket" Relationship="TCorpModel.FK_ReceiptBasket_PredefinedDiscount" FromRole="PredefinedDiscount" ToRole="ReceiptBasket" />
+        </EntityType>
+        <EntityType Name="PredefinedDiscount_Category">
+          <Key>
+            <PropertyRef Name="predefinedDiscount_id" />
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="predefinedDiscount_id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_PredefinedDiscount_Category_Category" FromRole="PredefinedDiscount_Category" ToRole="Category" />
+          <NavigationProperty Name="PredefinedDiscount" Relationship="TCorpModel.FK_PredefinedDiscount_Category_PredefinedDiscount" FromRole="PredefinedDiscount_Category" ToRole="PredefinedDiscount" />
+          <Property Name="MonthlyPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OneTimePrice" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_PredefinedDiscount_Category_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.PredefinedDiscount_Category" Role="PredefinedDiscount_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Category">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.PredefinedDiscount" Role="PredefinedDiscount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PredefinedDiscount_Category_PredefinedDiscount">
+          <End Type="TCorpModel.PredefinedDiscount" Role="PredefinedDiscount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.PredefinedDiscount_Category" Role="PredefinedDiscount_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PredefinedDiscount_Category">
+              <PropertyRef Name="predefinedDiscount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PredefinedDiscount_Role">
+          <End Type="TCorpModel.PredefinedDiscount" Role="PredefinedDiscount" Multiplicity="*" />
+          <End Type="TCorpModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ReceiptTemplateBasket_PredefinedDiscount">
+          <End Type="TCorpModel.PredefinedDiscount" Role="PredefinedDiscount" Multiplicity="0..1" />
+          <End Type="TCorpModel.ReceiptTemplateBasket" Role="ReceiptTemplateBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptTemplateBasket">
+              <PropertyRef Name="discount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SAP" Type="String" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberInStock" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Device_Price" Relationship="TCorpModel.FK_Device_Price_Device" FromRole="Device" ToRole="Device_Price" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="StockStateAtDate" Type="DateTime" Precision="3" />
+          <Property Name="Filename" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device_TSpotApps_Price" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Device" FromRole="Device" ToRole="Device_TSpotApps_Price" />
+        </EntityType>
+        <EntityType Name="Device_Price">
+          <Key>
+            <PropertyRef Name="device_id" />
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Device_Price_Category" FromRole="Device_Price" ToRole="Category" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_Device_Price_Contract" FromRole="Device_Price" ToRole="Contract" />
+          <NavigationProperty Name="Device" Relationship="TCorpModel.FK_Device_Price_Device" FromRole="Device_Price" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK_Device_Price_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_Price" Role="Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_Price_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_Price" Role="Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_Price_Device">
+          <End Type="TCorpModel.Device" Role="Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_Price" Role="Device_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_Price">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Device_SelectedCategories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="TRGO_sifra" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Device_SelectedCategories_Category" FromRole="Device_SelectedCategories" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Device_SelectedContracts">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <Property Name="TRGO_sifra" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_Device_SelectedContracts_Contract" FromRole="Device_SelectedContracts" ToRole="Contract" />
+        </EntityType>
+        <Association Name="FK_Device_SelectedCategories_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_SelectedCategories" Role="Device_SelectedCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_SelectedCategories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_SelectedContracts_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_SelectedContracts" Role="Device_SelectedContracts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_SelectedContracts">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent_id" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChildOrganizations" Relationship="TCorpModel.FK_Organization_Organization" FromRole="Organization" ToRole="Organization1" />
+          <NavigationProperty Name="ParentOrganization" Relationship="TCorpModel.FK_Organization_Organization" FromRole="Organization1" ToRole="Organization" />
+          <NavigationProperty Name="User" Relationship="TCorpModel.FK_User_Organization" FromRole="Organization" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Organization_Organization">
+          <End Type="TCorpModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="TCorpModel.Organization" Role="Organization1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Organization">
+          <End Type="TCorpModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="TCorpModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Category_InStock">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Category_InStock_Category" FromRole="Category_InStock" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Category_InStock_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Category_InStock" Role="Category_InStock" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_InStock">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceiptBasket_PredefinedDiscount">
+          <End Type="TCorpModel.PredefinedDiscount" Role="PredefinedDiscount" Multiplicity="0..1" />
+          <End Type="TCorpModel.ReceiptBasket" Role="ReceiptBasket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PredefinedDiscount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptBasket">
+              <PropertyRef Name="discount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Device_TSpotApps_Price">
+          <Key>
+            <PropertyRef Name="category_id" />
+            <PropertyRef Name="contract_id" />
+            <PropertyRef Name="cluster" />
+            <PropertyRef Name="device_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="contract_id" Type="Int32" Nullable="false" />
+          <Property Name="cluster" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="device_id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Category" FromRole="Device_TSpotApps_Price" ToRole="Category" />
+          <NavigationProperty Name="Contract" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Contract" FromRole="Device_TSpotApps_Price" ToRole="Contract" />
+          <NavigationProperty Name="Device" Relationship="TCorpModel.FK_Device_TSpotApps_Price_Device" FromRole="Device_TSpotApps_Price" ToRole="Device" />
+        </EntityType>
+        <EntityType Name="Device_TSpotApps_SelectedCategories">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" />
+          <Property Name="TSpotAppsNaziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="TCorpModel.FK_Device_TSpotApps_SelectedCategories_Category" FromRole="Device_TSpotApps_SelectedCategories" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Device_TSpotApps_Price_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_TSpotApps_Price" Role="Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_SelectedCategories_Category">
+          <End Type="TCorpModel.Category" Role="Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_TSpotApps_SelectedCategories" Role="Device_TSpotApps_SelectedCategories" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_SelectedCategories">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_Price_Contract">
+          <End Type="TCorpModel.Contract" Role="Contract" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_TSpotApps_Price" Role="Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Device_TSpotApps_Price_Device">
+          <End Type="TCorpModel.Device" Role="Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TCorpModel.Device_TSpotApps_Price" Role="Device_TSpotApps_Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device_TSpotApps_Price">
+              <PropertyRef Name="device_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TCorpModelStoreContainer" CdmEntityContainer="TCorpDbEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TCorpModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ShowContractOfferName" ColumnName="ShowContractOfferName" />
+                <ScalarProperty Name="OfferNameOneTime" ColumnName="OfferNameOneTime" />
+                <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+                <ScalarProperty Name="InitialDiscount" ColumnName="InitialDiscount" />
+                <ScalarProperty Name="InitialQuantity" ColumnName="InitialQuantity" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="TCorpModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="KontaktBroj" ColumnName="KontaktBroj" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="Tvrtka" ColumnName="Tvrtka" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Geo">
+            <EntityTypeMapping TypeName="TCorpModel.Geo">
+              <MappingFragment StoreEntitySet="Geo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipts">
+            <EntityTypeMapping TypeName="TCorpModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="PdfName" ColumnName="PdfName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="geo_id" ColumnName="geo_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptTemplate">
+            <EntityTypeMapping TypeName="TCorpModel.ReceiptTemplate">
+              <MappingFragment StoreEntitySet="ReceiptTemplate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptTemplateBasket">
+            <EntityTypeMapping TypeName="TCorpModel.ReceiptTemplateBasket">
+              <MappingFragment StoreEntitySet="ReceiptTemplateBasket">
+                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="JednokratnoZaduzenje" ColumnName="JednokratnoZaduzenje" />
+                <ScalarProperty Name="BezOsnovneUsluge" ColumnName="BezOsnovneUsluge" />
+                <ScalarProperty Name="OneTimeDiscount" ColumnName="OneTimeDiscount" />
+                <ScalarProperty Name="VrstaRada" ColumnName="VrstaRada" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="receiptTemplate_id" ColumnName="receiptTemplate_id" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TCorpModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ManagerPrivilages" ColumnName="ManagerPrivilages" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="TCorpModel.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocketActionLookup">
+            <EntityTypeMapping TypeName="TCorpModel.SocketActionLookup">
+              <MappingFragment StoreEntitySet="SocketActionLookup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocketLog">
+            <EntityTypeMapping TypeName="TCorpModel.SocketLog">
+              <MappingFragment StoreEntitySet="SocketLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="action_id" ColumnName="action_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocketUpdate">
+            <EntityTypeMapping TypeName="TCorpModel.SocketUpdate">
+              <MappingFragment StoreEntitySet="SocketUpdate">
+                <ScalarProperty Name="Safety" ColumnName="Safety" />
+                <ScalarProperty Name="BroadcastUpdate" ColumnName="BroadcastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="IsTypeOf(TCorpModel.User)">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="BccField" ColumnName="BccField" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="RequestChangeDate" ColumnName="RequestChangeDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="superiorUser_id" ColumnName="superiorUser_id" />
+                <ScalarProperty Name="OIB" ColumnName="OIB" />
+                <ScalarProperty Name="KPNumber" ColumnName="KPNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
+                <ScalarProperty Name="LastLoginRequest" ColumnName="LastLoginRequest" />
+                <ScalarProperty Name="IsBanned" ColumnName="IsBanned" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebActionLookup">
+            <EntityTypeMapping TypeName="TCorpModel.WebActionLookup">
+              <MappingFragment StoreEntitySet="WebActionLookup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebLogs">
+            <EntityTypeMapping TypeName="TCorpModel.WebLog">
+              <MappingFragment StoreEntitySet="WebLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="action_id" ColumnName="action_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Category_Role" TypeName="TCorpModel.Category_Role" StoreEntitySet="Category_Role">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="Id" ColumnName="category_id" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id" ColumnName="role_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Client_User" TypeName="TCorpModel.Client_User" StoreEntitySet="Client_User">
+            <EndProperty Name="Client">
+              <ScalarProperty Name="Id" ColumnName="client_id" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="AdditionalOptions">
+            <EntityTypeMapping TypeName="TCorpModel.AdditionalOptions">
+              <MappingFragment StoreEntitySet="AdditionalOptions">
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptAdditionalOption">
+            <EntityTypeMapping TypeName="TCorpModel.ReceiptAdditionalOption">
+              <MappingFragment StoreEntitySet="ReceiptAdditionalOption">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="JednokratnoZaduzenje" ColumnName="JednokratnoZaduzenje" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="receiptBasket_id" ColumnName="receiptBasket_id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Role_MaxDiscount">
+            <EntityTypeMapping TypeName="TCorpModel.Category_Role_MaxDiscount">
+              <MappingFragment StoreEntitySet="Category_Role_MaxDiscount">
+                <ScalarProperty Name="MaxDiscount" ColumnName="MaxDiscount" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptDefaultOption">
+            <EntityTypeMapping TypeName="TCorpModel.ReceiptDefaultOption">
+              <MappingFragment StoreEntitySet="ReceiptDefaultOption">
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="receiptTemplateBasket_id" ColumnName="receiptTemplateBasket_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Price">
+            <EntityTypeMapping TypeName="TCorpModel.Category_Price">
+              <MappingFragment StoreEntitySet="Category_Price">
+                <ScalarProperty Name="OneTimePrice" ColumnName="OneTimePrice" />
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="TCorpModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+                <ScalarProperty Name="Sifra" ColumnName="Sifra" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptBasket">
+            <EntityTypeMapping TypeName="TCorpModel.ReceiptBasket">
+              <MappingFragment StoreEntitySet="ReceiptBasket">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="JednokratnoZaduzenje" ColumnName="JednokratnoZaduzenje" />
+                <ScalarProperty Name="BezOsnovneUsluge" ColumnName="BezOsnovneUsluge" />
+                <ScalarProperty Name="OneTimeDiscount" ColumnName="OneTimeDiscount" />
+                <ScalarProperty Name="VrstaRada" ColumnName="VrstaRada" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="receipt_id" ColumnName="receipt_id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PredefinedDiscount">
+            <EntityTypeMapping TypeName="TCorpModel.PredefinedDiscount">
+              <MappingFragment StoreEntitySet="PredefinedDiscount">
+                <ScalarProperty Name="DurationInMonths" ColumnName="DurationInMonths" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PredefinedDiscount_Category">
+            <EntityTypeMapping TypeName="TCorpModel.PredefinedDiscount_Category">
+              <MappingFragment StoreEntitySet="PredefinedDiscount_Category">
+                <ScalarProperty Name="OneTimePrice" ColumnName="OneTimePrice" />
+                <ScalarProperty Name="MonthlyPrice" ColumnName="MonthlyPrice" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="predefinedDiscount_id" ColumnName="predefinedDiscount_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PredefinedDiscount_Role" TypeName="TCorpModel.PredefinedDiscount_Role" StoreEntitySet="PredefinedDiscount_Role">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id" ColumnName="role_id" />
+            </EndProperty>
+            <EndProperty Name="PredefinedDiscount">
+              <ScalarProperty Name="Id" ColumnName="predefinedDiscount_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Device">
+            <EntityTypeMapping TypeName="TCorpModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="StockStateAtDate" ColumnName="StockStateAtDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="NumberInStock" ColumnName="NumberInStock" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device_Price">
+            <EntityTypeMapping TypeName="TCorpModel.Device_Price">
+              <MappingFragment StoreEntitySet="Device_Price">
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device_SelectedCategories">
+            <EntityTypeMapping TypeName="TCorpModel.Device_SelectedCategories">
+              <MappingFragment StoreEntitySet="Device_SelectedCategories">
+                <ScalarProperty Name="TRGO_sifra" ColumnName="TRGO_sifra" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device_SelectedContracts">
+            <EntityTypeMapping TypeName="TCorpModel.Device_SelectedContracts">
+              <MappingFragment StoreEntitySet="Device_SelectedContracts">
+                <ScalarProperty Name="TRGO_sifra" ColumnName="TRGO_sifra" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organization">
+            <EntityTypeMapping TypeName="TCorpModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_InStock">
+            <EntityTypeMapping TypeName="TCorpModel.Category_InStock">
+              <MappingFragment StoreEntitySet="Category_InStock">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device_TSpotApps_Price">
+            <EntityTypeMapping TypeName="TCorpModel.Device_TSpotApps_Price">
+              <MappingFragment StoreEntitySet="Device_TSpotApps_Price">
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="cluster" ColumnName="cluster" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Device_TSpotApps_SelectedCategories">
+            <EntityTypeMapping TypeName="TCorpModel.Device_TSpotApps_SelectedCategories">
+              <MappingFragment StoreEntitySet="Device_TSpotApps_SelectedCategories">
+                <ScalarProperty Name="TSpotAppsNaziv" ColumnName="TSpotAppsNaziv" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0f2677411d54d73a94c85c39dc34258" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="LocalDbModel.Category" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="LocalDbModel.Role" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="LocalDbModel.Session" Width="1.5" PointX="7.5" PointY="1.625" />
+        <EntityTypeShape EntityType="LocalDbModel.User" Width="1.5" PointX="5.25" PointY="1" />
+        <AssociationConnector Association="LocalDbModel.FK_Category_ToTable" />
+        <AssociationConnector Association="LocalDbModel.FK_User_ToTable" />
+        <AssociationConnector Association="LocalDbModel.FK_Sessions_ToUser" />
+        <AssociationConnector Association="LocalDbModel.Category_Role" />
+        <EntityTypeShape EntityType="LocalDbModel.WebActionLookup" Width="1.5" PointX="10.250474720378628" PointY="23.734602834905779" />
+        <EntityTypeShape EntityType="LocalDbModel.WebLog" Width="1.5" PointX="7.7434450275001323" PointY="4.2819730957420417" />
+        <AssociationConnector Association="LocalDbModel.FK_WebLog_ToTable" />
+        <AssociationConnector Association="LocalDbModel.FK_WebLog_ToAction" />
+        <EntityTypeShape EntityType="LocalDbModel.Client" Width="1.5" PointX="11.358588454946219" PointY="6.8640698822513544" />
+        <EntityTypeShape EntityType="LocalDbModel.Geo" Width="1.5" PointX="6.802146549710141" PointY="2.1260607103472857" />
+        <EntityTypeShape EntityType="LocalDbModel.Receipt" Width="1.5" PointX="5.57096264398236" PointY="24.640713077336883" />
+        <EntityTypeShape EntityType="LocalDbModel.Receipt_ReceiptDetail" Width="1.5" PointX="5.96939876394784" PointY="7.9852646626463457" />
+        <EntityTypeShape EntityType="LocalDbModel.ReceiptBasket" Width="1.5" PointX="4.5" PointY="16.625" />
+        <EntityTypeShape EntityType="LocalDbModel.ReceiptDetail" Width="1.5" PointX="2.9140914449999533" PointY="18.090695449193333" />
+        <AssociationConnector Association="LocalDbModel.FK_ReceiptBasket_Category" />
+        <AssociationConnector Association="LocalDbModel.FK_Receipt_Client" />
+        <AssociationConnector Association="LocalDbModel.FK_Receipt_Geo" />
+        <AssociationConnector Association="LocalDbModel.FK_Receipt_ReceiptDetail_ToTable" />
+        <AssociationConnector Association="LocalDbModel.FK_Receipt_User" />
+        <AssociationConnector Association="LocalDbModel.FK_ReceiptBasket_Receipt" />
+        <AssociationConnector Association="LocalDbModel.FK_Receipt_ReceiptDetail_ToTable_1" />
+        <AssociationConnector Association="LocalDbModel.Client_User" />
+        <EntityTypeShape EntityType="LocalDbModel.ReceiptTemplate" Width="1.5" PointX="9.0556716383694074" PointY="11.836168905643826" />
+        <EntityTypeShape EntityType="LocalDbModel.ReceiptTemplateBasket" Width="1.5" PointX="0.27162511659396121" PointY="5.8667303500076429" />
+        <AssociationConnector Association="LocalDbModel.FK_ReceiptTemplateBasket_ToTable_1" />
+        <AssociationConnector Association="LocalDbModel.FK_ReceiptTemplate_ToTable" />
+        <AssociationConnector Association="LocalDbModel.FK_ReceiptTemplateBasket_ToTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

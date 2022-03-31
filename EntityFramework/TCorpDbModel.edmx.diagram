@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4885a02e2cd14412a59502bc5e5031f7" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="TCorpModel.Category" Width="1.5" PointX="1.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.Client" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.Geo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.Receipt" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.ReceiptTemplate" Width="1.5" PointX="5.625" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.ReceiptTemplateBasket" Width="1.5" PointX="7.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.Role" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.Session" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.SocketActionLookup" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.SocketLog" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.SocketUpdate" Width="1.5" PointX="10.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.User" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.WebActionLookup" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="TCorpModel.WebLog" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="TCorpModel.FK_Category_Category1" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_Receipt_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_Receipt_Geo" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_Receipt_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptTemplate_User" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="TCorpModel.FK_ReceiptTemplateBasket_ReceiptTemplate" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_Session_User" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="TCorpModel.FK_SocketLog_SocketActionLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_SocketLog_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_WebLog_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_WebLog_WebActionLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.Category_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.Client_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptTemplateBasket_Category" />
+        <EntityTypeShape EntityType="TCorpModel.AdditionalOptions" Width="1.5" PointX="3.75" PointY="3.5" />
+        <EntityTypeShape EntityType="TCorpModel.ReceiptAdditionalOption" Width="1.5" PointX="9.75" PointY="12.375" />
+        <AssociationConnector Association="TCorpModel.FK_User_User1" />
+        <EntityTypeShape EntityType="TCorpModel.Category_Role_MaxDiscount" Width="1.5" PointX="3.75" PointY="0.75" />
+        <AssociationConnector Association="TCorpModel.FK_Category_Role_MaxDiscount_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Category_Role_MaxDiscount_Role" />
+        <AssociationConnector Association="TCorpModel.FK_AdditionalOptions_Category" />
+        <EntityTypeShape EntityType="TCorpModel.ReceiptDefaultOption" Width="1.5" PointX="9.75" PointY="17.5" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptDefaultOption_ReceiptTemplate" />
+        <EntityTypeShape EntityType="TCorpModel.Category_Price" Width="1.5" PointX="11" PointY="2.875" />
+        <EntityTypeShape EntityType="TCorpModel.Contract" Width="1.5" PointX="8.75" PointY="4.375" />
+        <AssociationConnector Association="TCorpModel.FK_Category_Price_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Category_Price_Contract" />
+        <EntityTypeShape EntityType="TCorpModel.ReceiptBasket" Width="1.5" PointX="7.5" PointY="11.875" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptBasket_Category" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptBasket_Receipt" />
+        <AssociationConnector Association="TCorpModel.FK_Receipt_ReceiptDetail_Receipt" />
+        <AssociationConnector Association="TCorpModel.FK_Contract_Contract" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptBasket_Contract" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptTemplateBasket_Contract" />
+        <EntityTypeShape EntityType="TCorpModel.PredefinedDiscount" Width="1.5" PointX="11" PointY="8.5" />
+        <EntityTypeShape EntityType="TCorpModel.PredefinedDiscount_Category" Width="1.5" PointX="13.25" PointY="5.375" />
+        <AssociationConnector Association="TCorpModel.FK_PredefinedDiscount_Category_Category" />
+        <AssociationConnector Association="TCorpModel.FK_PredefinedDiscount_Contract" />
+        <AssociationConnector Association="TCorpModel.FK_PredefinedDiscount_Category_PredefinedDiscount" />
+        <AssociationConnector Association="TCorpModel.PredefinedDiscount_Role" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptTemplateBasket_PredefinedDiscount" />
+        <EntityTypeShape EntityType="TCorpModel.Device" Width="1.5" PointX="12.375" PointY="13" />
+        <EntityTypeShape EntityType="TCorpModel.Device_Price" Width="1.5" PointX="14.625" PointY="8.375" />
+        <AssociationConnector Association="TCorpModel.FK_Device_Price_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Device_Price_Contract" />
+        <AssociationConnector Association="TCorpModel.FK_Device_Price_Device" />
+        <EntityTypeShape EntityType="TCorpModel.Device_SelectedCategories" Width="1.5" PointX="3.75" PointY="23.25" />
+        <EntityTypeShape EntityType="TCorpModel.Device_SelectedContracts" Width="1.5" PointX="11" PointY="0.75" />
+        <AssociationConnector Association="TCorpModel.FK_Device_SelectedCategories_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Device_SelectedContracts_Contract" />
+        <EntityTypeShape EntityType="TCorpModel.Organization" Width="1.5" PointX="5.75" PointY="3.375" />
+        <AssociationConnector Association="TCorpModel.FK_Organization_Organization" />
+        <AssociationConnector Association="TCorpModel.FK_User_Organization" />
+        <EntityTypeShape EntityType="TCorpModel.Category_InStock" Width="1.5" PointX="3.75" PointY="25.75" />
+        <AssociationConnector Association="TCorpModel.FK_Category_InStock_Category" />
+        <AssociationConnector Association="TCorpModel.FK_ReceiptBasket_PredefinedDiscount" />
+        <EntityTypeShape EntityType="TCorpModel.Device_TSpotApps_Price" Width="1.5" PointX="15.625" PointY="4.625" />
+        <EntityTypeShape EntityType="TCorpModel.Device_TSpotApps_SelectedCategories" Width="1.5" PointX="3.75" PointY="29" />
+        <AssociationConnector Association="TCorpModel.FK_Device_TSpotApps_Price_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Device_TSpotApps_SelectedCategories_Category" />
+        <AssociationConnector Association="TCorpModel.FK_Device_TSpotApps_Price_Contract" />
+        <AssociationConnector Association="TCorpModel.FK_Device_TSpotApps_Price_Device" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
